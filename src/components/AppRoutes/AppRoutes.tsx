@@ -1,6 +1,8 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
+import { useAuth } from "../../hooks/useAuth";
+
 interface Props {
   path: string;
   Component: any;
@@ -10,13 +12,15 @@ interface Props {
 export const AppRoutes = (props: Props) => {
   const { path, Component, isPrivate, ...rest } = props;
 
-  const isLoggedIn = true;
+  const { auth } = useAuth();
+
+  const isLoggedIn = !!auth.email;
 
   return (
     <Route
       path={path}
       render={(props) =>
-        isPrivate && isLoggedIn ? (
+        isPrivate && !isLoggedIn ? (
           <Redirect to={{ pathname: "/login" }} />
         ) : (
           <Component {...props} />
