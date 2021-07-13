@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-import { Home } from "../components/Home";
-import { Login } from "../components/Login";
-import { PublicPage } from "../components/PublicPage";
-import { PrivatePage } from "../components/PrivatePage";
-import { NotFound } from "../components/NotFound";
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
+import { PublicPage } from "../pages/PublicPage";
+import { PrivatePage } from "../pages/PrivatePage";
+import { NotFound } from "../pages/NotFound";
 
 export interface IRoute {
   path: string;
