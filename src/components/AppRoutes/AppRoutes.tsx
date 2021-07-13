@@ -14,7 +14,7 @@ export const AppRoutes = (props: Props) => {
 
   const { auth } = useAuth();
 
-  const isLoggedIn = !!auth.email;
+  const { isLoggedIn } = auth;
 
   return (
     <Route

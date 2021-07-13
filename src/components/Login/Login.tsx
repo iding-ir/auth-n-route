@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
@@ -8,6 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import { LOGIN_WIDTH } from "../../constants";
 import { login } from "../../actions/auth";
+import { useAuth } from "../../hooks/useAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,11 +34,16 @@ export const Login = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const { auth } = useAuth();
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  return (
+  const { isLoggedIn } = auth;
+
+  return isLoggedIn ? (
+    <Redirect to={{ pathname: "/" }} />
+  ) : (
     <div className={classes.Login}>
       <Paper className={classes.wrapper}>
         <div className={classes.field}>

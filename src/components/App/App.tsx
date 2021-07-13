@@ -21,12 +21,15 @@ export const App = () => {
     <div className={classes.App}>
       <Switch>
         {routes.map((route: IRoute) => {
+          const { path, component, isPrivate, ...rest } = route;
+
           return (
             <AppRoutes
-              key={route.path}
-              path={route.path}
-              Component={route.component}
-              isPrivate={route.isPrivate}
+              key={path}
+              path={path}
+              Component={component}
+              isPrivate={isPrivate}
+              {...rest}
             />
           );
         })}
