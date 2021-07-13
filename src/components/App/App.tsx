@@ -1,7 +1,9 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { Switch } from "react-router-dom";
 
-import { Login } from "../Login";
+import { AppRoutes } from "../AppRoutes";
+import routes, { IRoute } from "../../configs/routes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +19,18 @@ export const App = () => {
 
   return (
     <div className={classes.App}>
-      <Login></Login>
+      <Switch>
+        {routes.map((route: IRoute) => {
+          return (
+            <AppRoutes
+              key={route.path}
+              path={route.path}
+              Component={route.component}
+              isPrivate={route.isPrivate}
+            />
+          );
+        })}
+      </Switch>
     </div>
   );
 };
