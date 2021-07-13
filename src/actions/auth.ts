@@ -7,13 +7,12 @@ export interface IAction {
     username: string;
     email: string;
     name: string;
+    token: string;
   };
 }
 
 export const login = (username: string, password: string): any => {
   return async (dispatch: any, getState: any) => {
-    console.log({ username, password });
-
     const response = await auth.get("/login.json");
 
     dispatch({ type: LOGIN, payload: response.data });

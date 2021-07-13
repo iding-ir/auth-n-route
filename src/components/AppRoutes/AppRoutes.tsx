@@ -19,13 +19,13 @@ export const AppRoutes = (props: Props) => {
   return (
     <Route
       path={path}
-      render={(props) =>
-        isPrivate && !isLoggedIn ? (
-          <Redirect to={{ pathname: "/login" }} />
-        ) : (
-          <Component {...props} />
-        )
-      }
+      render={(props) => {
+        if (isPrivate && !isLoggedIn) {
+          return <Redirect to={{ pathname: "/login" }} />;
+        } else {
+          return <Component {...props} />;
+        }
+      }}
       {...rest}
     />
   );
