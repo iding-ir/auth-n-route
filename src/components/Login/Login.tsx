@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
+import { useTranslation } from "react-i18next";
 
 import { LOGIN_WIDTH } from "../../constants";
+import { login } from "../../actions/auth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const Login = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -37,7 +42,7 @@ export const Login = () => {
         <div className={classes.field}>
           <TextField
             required
-            label="Username"
+            label={t("login.username")}
             variant="outlined"
             fullWidth={true}
             value={username}
@@ -51,7 +56,7 @@ export const Login = () => {
           <TextField
             type="password"
             required
-            label="Password"
+            label={t("login.password")}
             variant="outlined"
             fullWidth={true}
             value={password}
@@ -66,10 +71,10 @@ export const Login = () => {
             variant="outlined"
             fullWidth={true}
             onClick={() => {
-              console.log(username, password);
+              dispatch(login(username, password));
             }}
           >
-            Login
+            {t("login.button")}
           </Button>
         </div>
       </Paper>
