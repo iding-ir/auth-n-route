@@ -6,8 +6,8 @@ export const SWITCH_TOGGLE = "SWITCH_TOGGLE";
 export const SWITCH_ON = "SWITCH_ON";
 export const SWITCH_OFF = "SWITCH_OFF";
 
-export const LOGIN = "LOGIN";
-export const LOGOUT = "LOGOUT";
+export const AUTH_LOGIN = "AUTH_LOGIN";
+export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const PAGE_SET = "PAGE_SET";
 

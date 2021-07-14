@@ -15,7 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const App = () => {
+interface IProps {}
+
+export const App = (props: IProps) => {
   const classes = useStyles();
 
   return (

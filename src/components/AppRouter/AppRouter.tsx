@@ -1,80 +1,79 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { useDispatch } from "react-redux";
 import {
-  HashRouter,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
   RouteComponentProps,
 } from "react-router-dom";
 
-import { routes, IRoutes, IRoute, IRouteGroup } from "../../configs/routes";
+import { routes, IRoutes, IRoute, IRouteGroup } from "../../routes";
 import { useAuth } from "../../hooks/useAuth";
 import { setPage } from "../../actions/page";
+import * as URLS from "../../constants/urls";
 
-interface IPropsAppRouter {
-  children: JSX.Element;
+interface IProps {
+  children: ReactNode;
 }
 
-export const AppRouter = (props: IPropsAppRouter) => {
+export const AppRouter = (props: IProps) => {
+  const { children } = props;
+
   const dispatch = useDispatch();
   const { auth } = useAuth();
 
   const { isLoggedIn } = auth;
 
-  const searchRoutes = (routes: IRoutes, url: string) => {
+  const searchRoutes = (routes: IRoutes, pathname: string) => {
     let result: any = false;
 
     routes.forEach((route: IRoute | IRouteGroup) => {
-      if (route.path === url) {
+      if (route.path === pathname) {
         result = route;
       }
 
       if ("items" in route && !result) {
-        result = searchRoutes(route.items, url);
+        result = searchRoutes(route.items, pathname);
       }
     });
 
     return result;
   };
 
-  const pageRouteRenderer = ({ match }: RouteComponentProps) => {
-    const { url } = match;
-    const route = searchRoutes(routes, url) || routes[0];
+  const pageRouteRenderer = (props: RouteComponentProps) => {
+    const { location } = props;
+    const { pathname } = location;
+
+    const route = searchRoutes(routes, pathname);
+
+    const { showPrivate, showPublic } = route;
 
     dispatch(setPage(route));
 
-    return null;
+    return showPrivate && !isLoggedIn && !showPublic ? (
+      <Redirect to={{ pathname: URLS.URL_LOGIN }} />
+    ) : null;
   };
 
   const renderRoutes = () => {
-    return Object.values(routes).map((route: IRoute | IRouteGroup) => {
-      const { key, path, isPrivate, isPublic } = route;
-
+    return Object.values(URLS).map((url: string) => {
       return (
         <Route
-          key={key}
+          key={url}
           exact
-          path={path}
-          render={(props) => {
-            if (isPrivate && !isLoggedIn && !isPublic) {
-              return <Redirect to={{ pathname: "/login" }} />;
-            } else if ((isPrivate && isLoggedIn) || (isPublic && !isLoggedIn)) {
-              return pageRouteRenderer;
-            } else {
-              return null;
-            }
-          }}
+          path={url}
+          render={(props) => pageRouteRenderer(props)}
         />
       );
     });
   };
 
   return (
-    <HashRouter>
+    <Router>
       <Switch>{renderRoutes()}</Switch>
 
-      {props.children}
-    </HashRouter>
+      {children}
+    </Router>
   );
 };

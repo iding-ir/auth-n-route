@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "../constants";
+import { AUTH_LOGIN, AUTH_LOGOUT } from "../constants/redux";
 import { IAction } from "../actions/auth";
 
 export interface IStateAuth {
@@ -19,7 +19,7 @@ const initialState = {
 
 const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
-    case LOGIN:
+    case AUTH_LOGIN:
       return {
         username: action.payload?.username,
         email: action.payload?.email,
@@ -27,7 +27,7 @@ const reducer = (state = initialState, action: IAction) => {
         token: action.payload?.token,
         isLoggedIn: true,
       };
-    case LOGOUT:
+    case AUTH_LOGOUT:
       return {
         username: null,
         email: null,

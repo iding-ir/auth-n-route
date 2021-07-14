@@ -1,7 +1,7 @@
 import React from "react";
 
-interface Props {}
+interface IProps {}
 
-export const NotFound = (props: Props) => {
+export const NotFound = (props: IProps) => {
   return <div>NotFound</div>;
 };

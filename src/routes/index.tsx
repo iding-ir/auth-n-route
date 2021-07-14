@@ -8,8 +8,9 @@ import ProfileIcon from "@material-ui/icons/Person";
 import LoginIcon from "@material-ui/icons/AccountBox";
 import LogoutIcon from "@material-ui/icons/MeetingRoom";
 import NotFoundIcon from "@material-ui/icons/PanTool";
+import ScheduleIcon from "@material-ui/icons/Alarm";
 
-import * as URLS from "../constants";
+import * as URLS from "../constants/urls";
 import { Home } from "../pages/Home";
 // import { Multimedia } from "../pages/Multimedia";
 import { Photo } from "../pages/Photo";
@@ -19,11 +20,13 @@ import { Profile } from "../pages/Profile";
 import { Login } from "../pages/Login";
 import { Logout } from "../pages/Logout";
 import { NotFound } from "../pages/NotFound";
+import { ThemeSwitch } from "../components/ThemeSwitch";
+import { SettingsModal } from "../components/SettingsModal";
 
 export interface IRoute {
   key: string;
-  isPrivate: boolean;
-  isPublic: boolean;
+  showPrivate: boolean;
+  showPublic: boolean;
   showInSidebar: boolean;
   path?: string;
   label?: string;
@@ -43,8 +46,8 @@ export type IRoutes = (IRoute | IRouteGroup)[];
 export const routes: IRoutes = [
   {
     key: "home",
-    isPrivate: true,
-    isPublic: true,
+    showPrivate: true,
+    showPublic: true,
     showInSidebar: true,
     path: URLS.URL_HOME,
     label: "sidebar.home",
@@ -54,8 +57,8 @@ export const routes: IRoutes = [
   },
   {
     key: "multimedia",
-    isPrivate: true,
-    isPublic: true,
+    showPrivate: true,
+    showPublic: true,
     showInSidebar: true,
     // path: URLS.URL_MULTIMEDIA,
     label: "sidebar.multimedia",
@@ -64,8 +67,8 @@ export const routes: IRoutes = [
     items: [
       {
         key: "photo",
-        isPrivate: true,
-        isPublic: true,
+        showPrivate: true,
+        showPublic: true,
         showInSidebar: true,
         path: URLS.URL_PHOTO,
         label: "sidebar.photo",
@@ -74,8 +77,8 @@ export const routes: IRoutes = [
       },
       {
         key: "video",
-        isPrivate: true,
-        isPublic: true,
+        showPrivate: true,
+        showPublic: true,
         showInSidebar: true,
         path: URLS.URL_VIDEO,
         label: "sidebar.video",
@@ -84,8 +87,8 @@ export const routes: IRoutes = [
       },
       {
         key: "audio",
-        isPrivate: true,
-        isPublic: true,
+        showPrivate: true,
+        showPublic: true,
         showInSidebar: true,
         path: URLS.URL_AUDIO,
         label: "sidebar.audio",
@@ -96,8 +99,8 @@ export const routes: IRoutes = [
   },
   {
     key: "profile",
-    isPrivate: true,
-    isPublic: false,
+    showPrivate: true,
+    showPublic: false,
     showInSidebar: true,
     path: URLS.URL_PROFILE,
     label: "sidebar.profile",
@@ -105,9 +108,34 @@ export const routes: IRoutes = [
     component: <Profile />,
   },
   {
+    key: "schedule",
+    showPrivate: true,
+    showPublic: true,
+    showInSidebar: true,
+    label: "sidebar.schedule",
+    icon: <ScheduleIcon />,
+    action: () => {
+      alert();
+    },
+  },
+  {
+    key: "theme",
+    showPrivate: true,
+    showPublic: true,
+    showInSidebar: true,
+    custom: <ThemeSwitch />,
+  },
+  {
+    key: "settings",
+    showPrivate: true,
+    showPublic: true,
+    showInSidebar: true,
+    custom: <SettingsModal />,
+  },
+  {
     key: "login",
-    isPrivate: false,
-    isPublic: true,
+    showPrivate: false,
+    showPublic: true,
     showInSidebar: true,
     path: URLS.URL_LOGIN,
     label: "sidebar.login",
@@ -116,8 +144,8 @@ export const routes: IRoutes = [
   },
   {
     key: "logout",
-    isPrivate: true,
-    isPublic: false,
+    showPrivate: true,
+    showPublic: false,
     showInSidebar: true,
     path: URLS.URL_LOGOUT,
     label: "sidebar.logout",
@@ -126,12 +154,15 @@ export const routes: IRoutes = [
   },
   {
     key: "not-found",
-    isPrivate: true,
-    isPublic: true,
+    showPrivate: true,
+    showPublic: true,
     showInSidebar: false,
     path: URLS.URL_NOT_FOUND,
     label: "sidebar.notFound",
     icon: <NotFoundIcon />,
     component: <NotFound />,
+    exact: false,
   },
 ];
+
+export const iRoute: IRoute | IRouteGroup = routes[0];

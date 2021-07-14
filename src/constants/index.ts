@@ -1,3 +1,3 @@
 export * from "./redux";
-export * from "./constants";
+export * from "./config";
 export * from "./urls";

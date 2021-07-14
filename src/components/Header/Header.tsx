@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useTranslation } from "react-i18next";
 
-import { SIDEBAR_WIDTH } from "../../constants";
+import { SIDEBAR_WIDTH } from "../../constants/config";
 import { openSidebar } from "../../actions/sidebar";
 import { IState } from "../../reducers";
 

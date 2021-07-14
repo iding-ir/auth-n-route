@@ -20,10 +20,9 @@ import Collapse from "@material-ui/core/Collapse";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { SIDEBAR_WIDTH } from "../../constants";
-import { toggleSidebar } from "../../actions/sidebar";
-import { setPage } from "../../actions/page";
-import { routes, IRoute, IRouteGroup, IRoutes } from "../../configs/routes";
+import { SIDEBAR_WIDTH } from "../../constants/config";
+import { closeSidebar } from "../../actions/sidebar";
+import { routes, IRoute, IRouteGroup, IRoutes } from "../../routes";
 import { IState } from "../../reducers";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -66,14 +65,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface IPropsSidebar {}
+interface IProps {}
 
-export const Sidebar = (props: IPropsSidebar) => {
+export const Sidebar = (props: IProps) => {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [open, setOpen] = useState<{ [key: string]: boolean }>({});
+
+  const [collapseOpen, setCollapseOpen] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
   const selectedPage = useSelector((state: IState) => state.page.selected);
@@ -82,8 +84,8 @@ export const Sidebar = (props: IPropsSidebar) => {
 
   const { isLoggedIn } = auth;
 
-  const handleDrawerToggle = () => {
-    dispatch(toggleSidebar());
+  const handleCloseDrawer = () => {
+    dispatch(closeSidebar());
   };
 
   const renderList = (list: IRoutes, nested: boolean) => {
@@ -97,7 +99,11 @@ export const Sidebar = (props: IPropsSidebar) => {
         const renderCollapse = () => {
           if ("items" in item) {
             return (
-              <Collapse in={open[item.key]} timeout="auto" unmountOnExit>
+              <Collapse
+                in={collapseOpen[item.key]}
+                timeout="auto"
+                unmountOnExit
+              >
                 {renderList(item.items, true)}
               </Collapse>
             );
@@ -106,7 +112,7 @@ export const Sidebar = (props: IPropsSidebar) => {
 
         const renderCollapseIcon = () => {
           if ("items" in item) {
-            return open[item.key] ? <ExpandLess /> : <ExpandMore />;
+            return collapseOpen[item.key] ? <ExpandLess /> : <ExpandMore />;
           }
         };
 
@@ -115,11 +121,10 @@ export const Sidebar = (props: IPropsSidebar) => {
             item.action();
           }
 
-          if (item.path && item.component) {
-            dispatch(setPage(item));
-          }
-
-          setOpen({ ...open, [item.key]: !open[item.key] });
+          setCollapseOpen({
+            ...collapseOpen,
+            [item.key]: !collapseOpen[item.key],
+          });
         };
 
         const renderItem = () => {
@@ -151,7 +156,8 @@ export const Sidebar = (props: IPropsSidebar) => {
         };
 
         return item.showInSidebar &&
-          ((isLoggedIn && item.isPrivate) || (!isLoggedIn && item.isPublic)) ? (
+          ((isLoggedIn && item.showPrivate) ||
+            (!isLoggedIn && item.showPublic)) ? (
           <div key={item.key}>
             {renderItem()}
 
@@ -174,14 +180,14 @@ export const Sidebar = (props: IPropsSidebar) => {
   );
 
   return (
-    <nav className={classes.drawer} aria-label="mailbox folders">
+    <nav className={classes.drawer} aria-label="drawer">
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Hidden smUp implementation="css">
         <Drawer
           variant="temporary"
           anchor={theme.direction === "rtl" ? "right" : "left"}
           open={sidebarOpen}
-          onClose={handleDrawerToggle}
+          onClose={handleCloseDrawer}
           classes={{
             paper: classes.drawerPaper,
           }}

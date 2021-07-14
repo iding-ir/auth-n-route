@@ -4,9 +4,11 @@ import { useDispatch } from "react-redux";
 
 import { logout } from "../../actions/auth";
 import { useAuth } from "../../hooks/useAuth";
-import * as URLS from "../../constants";
+import * as URLS from "../../constants/urls";
 
-export const Logout = () => {
+interface IProps {}
+
+export const Logout = (props: IProps) => {
   const dispatch = useDispatch();
   const { auth } = useAuth();
 

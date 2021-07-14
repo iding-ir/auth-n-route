@@ -1,7 +1,7 @@
 import React from "react";
 
-interface Props {}
+interface IProps {}
 
-export const Multimedia = (props: Props) => {
+export const Multimedia = (props: IProps) => {
   return <div>Multimedia</div>;
 };

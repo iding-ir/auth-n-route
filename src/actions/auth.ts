@@ -1,7 +1,7 @@
-import { LOGIN, LOGOUT, PAGE_SET } from "../constants";
+import { AUTH_LOGIN, AUTH_LOGOUT, PAGE_SET } from "../constants/redux";
+import { URL_HOME, URL_LOGIN } from "../constants/urls";
 import auth from "../apis/auth";
-import * as URLS from "../constants";
-import { routes, IRoute } from "../configs/routes";
+import { routes, IRoute } from "../routes";
 
 export interface IAction {
   type: string;
@@ -14,31 +14,27 @@ export interface IAction {
 }
 
 export const login = (username: string, password: string): any => {
-  const homeRoute = routes.filter(
-    (route: IRoute) => route.path === URLS.URL_HOME
-  )[0];
+  const homeRoute = routes.find((route: IRoute) => route.path === URL_HOME);
 
   return async (dispatch: any, getState: any) => {
     const response = await auth.get("/login.json");
 
     if (response.data.success) {
-      dispatch({ type: PAGE_SET, payload: homeRoute });
-      dispatch({ type: LOGIN, payload: response.data.data });
+      dispatch({ type: AUTH_LOGIN, payload: response.data.data });
+      dispatch({ type: PAGE_SET, payload: { route: homeRoute } });
     }
   };
 };
 
 export const logout = (username: string | null): any => {
-  const loginRoute = routes.filter(
-    (route: IRoute) => route.path === URLS.URL_LOGIN
-  )[0];
+  const loginRoute = routes.find((route: IRoute) => route.path === URL_LOGIN);
 
   return async (dispatch: any, getState: any) => {
     const response = await auth.get("/logout.json");
 
     if (response.data.success) {
-      dispatch({ type: PAGE_SET, payload: loginRoute });
-      dispatch({ type: LOGOUT });
+      dispatch({ type: AUTH_LOGOUT });
+      dispatch({ type: PAGE_SET, payload: { route: loginRoute } });
     }
   };
 };

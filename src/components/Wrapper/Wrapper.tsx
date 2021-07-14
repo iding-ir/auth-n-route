@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react";
+import React, { ReactNode } from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 
@@ -9,6 +9,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: "flex",
+      height: "100%",
     },
   })
 );

@@ -1,13 +1,15 @@
 import { THEME_CHANGE } from "../constants/redux";
 
-export type payload = "light" | "dark" | undefined;
+export type ITheme = "light" | "dark" | undefined;
 
 export interface IActionTheme {
   type: string;
-  payload: payload;
+  payload: {
+    theme: ITheme;
+  };
 }
 
-export const changeTheme = (payload: payload): IActionTheme => ({
+export const changeTheme = (theme: ITheme): IActionTheme => ({
   type: THEME_CHANGE,
-  payload,
+  payload: { theme },
 });

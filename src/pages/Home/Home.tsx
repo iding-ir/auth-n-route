@@ -1,7 +1,7 @@
 import React from "react";
 
-interface Props {}
+interface IProps {}
 
-export const Home = (props: Props) => {
+export const Home = (props: IProps) => {
   return <div>Home</div>;
 };

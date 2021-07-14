@@ -1,25 +1,25 @@
 import { combineReducers } from "redux";
 
-import sidebarReducer, { IStateSidebar } from "./sidebar";
 import authReducer, { IStateAuth } from "./auth";
 import pageReducer, { IStatePage } from "./page";
-import ThemeReducer, { IStateTheme } from "./theme";
+import sidebarReducer, { IStateSidebar } from "./sidebar";
 import SwitchesReducer, { IStateSwitches } from "./switches";
+import ThemeReducer, { IStateTheme } from "./theme";
 
 export interface IState {
-  sidebar: IStateSidebar;
   auth: IStateAuth;
   page: IStatePage;
-  theme: IStateTheme;
+  sidebar: IStateSidebar;
   switches: IStateSwitches;
+  theme: IStateTheme;
 }
 
 const combinedReducers = combineReducers({
-  sidebar: sidebarReducer,
   auth: authReducer,
   page: pageReducer,
-  theme: ThemeReducer,
+  sidebar: sidebarReducer,
   switches: SwitchesReducer,
+  theme: ThemeReducer,
 });
 
 export default combinedReducers;

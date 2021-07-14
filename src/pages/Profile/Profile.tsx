@@ -1,7 +1,7 @@
 import React from "react";
 
-interface Props {}
+interface IProps {}
 
-export const Profile = (props: Props) => {
+export const Profile = (props: IProps) => {
   return <div>Profile</div>;
 };

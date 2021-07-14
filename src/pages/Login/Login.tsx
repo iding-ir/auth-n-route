@@ -7,10 +7,10 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import { useTranslation } from "react-i18next";
 
-import { LOGIN_WIDTH } from "../../constants";
+import { LOGIN_WIDTH } from "../../constants/config";
 import { login } from "../../actions/auth";
 import { useAuth } from "../../hooks/useAuth";
-import * as URLS from "../../constants";
+import * as URLS from "../../constants/urls";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Login = () => {
+interface IProps {}
+
+export const Login = (props: IProps) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();
