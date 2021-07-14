@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { LOGIN_WIDTH } from "../../constants";
 import { login } from "../../actions/auth";
 import { useAuth } from "../../hooks/useAuth";
+import * as URLS from "../../constants";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,7 +43,7 @@ export const Login = () => {
   const { isLoggedIn } = auth;
 
   return isLoggedIn ? (
-    <Redirect to={{ pathname: "/" }} />
+    <Redirect to={{ pathname: URLS.URL_HOME }} />
   ) : (
     <div className={classes.Login}>
       <Paper className={classes.wrapper}>

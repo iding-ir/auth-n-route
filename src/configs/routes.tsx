@@ -1,21 +1,23 @@
 import React, { ReactNode } from "react";
 import HomeIcon from "@material-ui/icons/Home";
-import LoginIcon from "@material-ui/icons/AccountBox";
 import MultimediaIcon from "@material-ui/icons/PermMedia";
 import PhotoIcon from "@material-ui/icons/PhotoCamera";
 import VideoIcon from "@material-ui/icons/Movie";
 import AudioIcon from "@material-ui/icons/Audiotrack";
 import ProfileIcon from "@material-ui/icons/Person";
+import LoginIcon from "@material-ui/icons/AccountBox";
+import LogoutIcon from "@material-ui/icons/MeetingRoom";
 import NotFoundIcon from "@material-ui/icons/PanTool";
 
-import * as URLS from "../constants/urls";
+import * as URLS from "../constants";
 import { Home } from "../pages/Home";
-import { Login } from "../pages/Login";
 // import { Multimedia } from "../pages/Multimedia";
 import { Photo } from "../pages/Photo";
 import { Video } from "../pages/Video";
 import { Audio } from "../pages/Audio";
 import { Profile } from "../pages/Profile";
+import { Login } from "../pages/Login";
+import { Logout } from "../pages/Logout";
 import { NotFound } from "../pages/NotFound";
 
 export interface IRoute {
@@ -44,7 +46,7 @@ export const routes: IRoutes = [
     isPrivate: true,
     isPublic: true,
     showInSidebar: true,
-    path: URLS.home,
+    path: URLS.URL_HOME,
     label: "sidebar.home",
     icon: <HomeIcon />,
     component: <Home />,
@@ -55,7 +57,7 @@ export const routes: IRoutes = [
     isPrivate: true,
     isPublic: true,
     showInSidebar: true,
-    // path: URLS.multimedia,
+    // path: URLS.URL_MULTIMEDIA,
     label: "sidebar.multimedia",
     icon: <MultimediaIcon />,
     // component: <Multimedia />,
@@ -65,7 +67,7 @@ export const routes: IRoutes = [
         isPrivate: true,
         isPublic: true,
         showInSidebar: true,
-        path: URLS.photo,
+        path: URLS.URL_PHOTO,
         label: "sidebar.photo",
         icon: <PhotoIcon />,
         component: <Photo />,
@@ -75,7 +77,7 @@ export const routes: IRoutes = [
         isPrivate: true,
         isPublic: true,
         showInSidebar: true,
-        path: URLS.video,
+        path: URLS.URL_VIDEO,
         label: "sidebar.video",
         icon: <VideoIcon />,
         component: <Video />,
@@ -85,7 +87,7 @@ export const routes: IRoutes = [
         isPrivate: true,
         isPublic: true,
         showInSidebar: true,
-        path: URLS.audio,
+        path: URLS.URL_AUDIO,
         label: "sidebar.audio",
         icon: <AudioIcon />,
         component: <Audio />,
@@ -97,7 +99,7 @@ export const routes: IRoutes = [
     isPrivate: true,
     isPublic: false,
     showInSidebar: true,
-    path: URLS.profile,
+    path: URLS.URL_PROFILE,
     label: "sidebar.profile",
     icon: <ProfileIcon />,
     component: <Profile />,
@@ -107,17 +109,27 @@ export const routes: IRoutes = [
     isPrivate: false,
     isPublic: true,
     showInSidebar: true,
-    path: URLS.login,
+    path: URLS.URL_LOGIN,
     label: "sidebar.login",
     icon: <LoginIcon />,
     component: <Login />,
+  },
+  {
+    key: "logout",
+    isPrivate: true,
+    isPublic: false,
+    showInSidebar: true,
+    path: URLS.URL_LOGOUT,
+    label: "sidebar.logout",
+    icon: <LogoutIcon />,
+    component: <Logout />,
   },
   {
     key: "not-found",
     isPrivate: true,
     isPublic: true,
     showInSidebar: false,
-    path: URLS.notFound,
+    path: URLS.URL_NOT_FOUND,
     label: "sidebar.notFound",
     icon: <NotFoundIcon />,
     component: <NotFound />,

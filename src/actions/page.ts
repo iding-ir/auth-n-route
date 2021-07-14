@@ -1,12 +1,12 @@
 import { PAGE_SET } from "../constants/redux";
-import { IRoute } from "../configs/routes";
+import { IRoute, IRouteGroup } from "../configs/routes";
 
 export interface IActionPage {
   type: string;
-  payload: IRoute;
+  payload: IRoute | IRouteGroup;
 }
 
-export const setPage = (payload: IRoute): IActionPage => ({
+export const setPage = (payload: IRoute | IRouteGroup): IActionPage => ({
   type: PAGE_SET,
   payload,
 });

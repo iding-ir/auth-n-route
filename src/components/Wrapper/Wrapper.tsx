@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ReactNode} from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles(() =>
 );
 
 interface IProps {
-  children: JSX.Element[];
+  children: ReactNode;
 }
 
 export const Wrapper = (props: IProps) => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
-  HashRouter as Router,
+  HashRouter,
   Switch,
   Route,
   Redirect,
@@ -48,27 +48,33 @@ export const AppRouter = (props: IPropsAppRouter) => {
   };
 
   const renderRoutes = () => {
-    return Object.values(routes).map((route: IRoute | IRouteGroup) => (
-      <Route
-        key={route.key}
-        exact
-        path={route.path}
-        render={(props) => {
-          if (route.isPrivate && !isLoggedIn) {
-            return <Redirect to={{ pathname: "/login" }} />;
-          } else {
-            return pageRouteRenderer;
-          }
-        }}
-      />
-    ));
+    return Object.values(routes).map((route: IRoute | IRouteGroup) => {
+      const { key, path, isPrivate, isPublic } = route;
+
+      return (
+        <Route
+          key={key}
+          exact
+          path={path}
+          render={(props) => {
+            if (isPrivate && !isLoggedIn && !isPublic) {
+              return <Redirect to={{ pathname: "/login" }} />;
+            } else if ((isPrivate && isLoggedIn) || (isPublic && !isLoggedIn)) {
+              return pageRouteRenderer;
+            } else {
+              return null;
+            }
+          }}
+        />
+      );
+    });
   };
 
   return (
-    <Router>
+    <HashRouter>
       <Switch>{renderRoutes()}</Switch>
 
       {props.children}
-    </Router>
+    </HashRouter>
   );
 };

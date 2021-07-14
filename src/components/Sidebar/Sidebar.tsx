@@ -25,6 +25,7 @@ import { toggleSidebar } from "../../actions/sidebar";
 import { setPage } from "../../actions/page";
 import { routes, IRoute, IRouteGroup, IRoutes } from "../../configs/routes";
 import { IState } from "../../reducers";
+import { useAuth } from "../../hooks/useAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -76,6 +77,10 @@ export const Sidebar = (props: IPropsSidebar) => {
 
   const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
   const selectedPage = useSelector((state: IState) => state.page.selected);
+
+  const { auth } = useAuth();
+
+  const { isLoggedIn } = auth;
 
   const handleDrawerToggle = () => {
     dispatch(toggleSidebar());
@@ -145,7 +150,8 @@ export const Sidebar = (props: IPropsSidebar) => {
           }
         };
 
-        return item.showInSidebar ? (
+        return item.showInSidebar &&
+          ((isLoggedIn && item.isPrivate) || (!isLoggedIn && item.isPublic)) ? (
           <div key={item.key}>
             {renderItem()}
 

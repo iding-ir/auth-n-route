@@ -1,4 +1,4 @@
-import { LOGIN } from "../constants";
+import { LOGIN, LOGOUT } from "../constants";
 import { IAction } from "../actions/auth";
 
 export interface IStateAuth {
@@ -21,11 +21,19 @@ const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case LOGIN:
       return {
-        username: action.payload.username,
-        email: action.payload.email,
-        name: action.payload.name,
-        token: action.payload.token,
+        username: action.payload?.username,
+        email: action.payload?.email,
+        name: action.payload?.name,
+        token: action.payload?.token,
         isLoggedIn: true,
+      };
+    case LOGOUT:
+      return {
+        username: null,
+        email: null,
+        name: null,
+        token: null,
+        isLoggedIn: false,
       };
     default:
       return state;

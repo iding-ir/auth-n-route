@@ -1,8 +1,9 @@
-export const home = "/";
-export const login = "/login";
-// export const multimedia = "/multimedia";
-export const photo = "/photo";
-export const video = "/video";
-export const audio = "/audio";
-export const profile = "/profile";
-export const notFound = "/*";
+export const URL_HOME = "/";
+// export const URL_MULTIMEDIA = "/multimedia";
+export const URL_PHOTO = "/photo";
+export const URL_VIDEO = "/video";
+export const URL_AUDIO = "/audio";
+export const URL_PROFILE = "/profile";
+export const URL_LOGIN = "/login";
+export const URL_LOGOUT = "/logout";
+export const URL_NOT_FOUND = "/*";

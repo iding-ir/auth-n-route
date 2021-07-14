@@ -1,9 +1,6 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Switch } from "react-router-dom";
 
-import { AppRouter } from "../AppRouter";
-import { routes, IRoute } from "../../configs/routes";
 import { Wrapper } from "../Wrapper";
 import { Header } from "../Header";
 import { Sidebar } from "../Sidebar";
@@ -22,12 +19,14 @@ export const App = () => {
   const classes = useStyles();
 
   return (
-    <Wrapper>
-      <Header />
+    <div className={classes.App}>
+      <Wrapper>
+        <Header />
 
-      <Sidebar />
+        <Sidebar />
 
-      <Content />
-    </Wrapper>
+        <Content />
+      </Wrapper>
+    </div>
   );
 };
