@@ -1,14 +1,22 @@
 import React, { ReactNode } from "react";
+import HomeIcon from "@material-ui/icons/Home";
+import LoginIcon from "@material-ui/icons/AccountBox";
 import InboxIcon from "@material-ui/icons/Inbox";
+import MultimediaIcon from "@material-ui/icons/PermMedia";
+import PhotoIcon from "@material-ui/icons/PhotoCamera";
+import VideoIcon from "@material-ui/icons/Movie";
+import AudioIcon from "@material-ui/icons/Audiotrack";
+import ProfileIcon from "@material-ui/icons/Person";
+import NotFoundIcon from "@material-ui/icons/PanTool";
 
 import * as URLS from "../constants/urls";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { PublicPage } from "../pages/PublicPage";
+import { Multimedia } from "../pages/Multimedia";
 import { Photo } from "../pages/Photo";
 import { Video } from "../pages/Video";
 import { Audio } from "../pages/Audio";
-import { PrivatePage } from "../pages/PrivatePage";
+import { Profile } from "../pages/Profile";
 import { NotFound } from "../pages/NotFound";
 
 export interface IRoute {
@@ -35,7 +43,7 @@ export const routes: IRoutes = [
     isPrivate: false,
     path: URLS.home,
     label: "sidebar.home",
-    icon: <InboxIcon />,
+    icon: <HomeIcon />,
     component: Home,
     exact: true,
   },
@@ -44,23 +52,23 @@ export const routes: IRoutes = [
     isPrivate: false,
     path: URLS.login,
     label: "sidebar.login",
-    icon: <InboxIcon />,
+    icon: <LoginIcon />,
     component: Login,
   },
   {
-    key: "public-page",
+    key: "multimedia",
     isPrivate: false,
-    path: URLS.publicPage,
-    label: "sidebar.publicPage",
-    icon: <InboxIcon />,
-    component: PublicPage,
+    path: URLS.multimedia,
+    label: "sidebar.multimedia",
+    icon: <MultimediaIcon />,
+    component: Multimedia,
     items: [
       {
         key: "photo",
         isPrivate: false,
         path: URLS.photo,
         label: "sidebar.photo",
-        icon: <InboxIcon />,
+        icon: <PhotoIcon />,
         component: Photo,
       },
       {
@@ -68,7 +76,7 @@ export const routes: IRoutes = [
         isPrivate: false,
         path: URLS.video,
         label: "sidebar.video",
-        icon: <InboxIcon />,
+        icon: <VideoIcon />,
         component: Video,
       },
       {
@@ -76,25 +84,25 @@ export const routes: IRoutes = [
         isPrivate: false,
         path: URLS.audio,
         label: "sidebar.audio",
-        icon: <InboxIcon />,
+        icon: <AudioIcon />,
         component: Audio,
       },
     ],
   },
   {
-    key: "private-page",
+    key: "profile",
     isPrivate: true,
-    path: URLS.privatePage,
-    label: "sidebar.privatePage",
-    icon: <InboxIcon />,
-    component: PrivatePage,
+    path: URLS.profile,
+    label: "sidebar.profile",
+    icon: <ProfileIcon />,
+    component: Profile,
   },
   {
     key: "not-found",
     isPrivate: false,
     path: URLS.notFound,
     label: "sidebar.notFound",
-    icon: <InboxIcon />,
+    icon: <NotFoundIcon />,
     component: NotFound,
   },
 ];

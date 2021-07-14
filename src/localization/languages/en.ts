@@ -5,13 +5,14 @@ const localization = {
     button: "Login",
   },
   sidebar: {
+    title: "Auth N Route",
     home: "Home",
     login: "Login",
-    publicPage: "Public Page",
+    multimedia: "Multimedia",
     photo: "Photo",
     video: "Video",
     audio: "Audio",
-    privatePage: "Private Page",
+    profile: "Profile",
     notFound: "Not Found",
   },
 };
