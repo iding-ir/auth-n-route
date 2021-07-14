@@ -10,8 +10,8 @@ import ThemeIcon from "@material-ui/icons/EventNote";
 import Switch from "@material-ui/core/Switch";
 
 import { toggleSwitch } from "../../actions/switches";
-import { changeTheme } from "../../actions/theme";
 import { IState } from "../../reducers";
+import { useTheme } from "../../themes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,9 +26,9 @@ export const ThemeSwitch = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const { toggleTheme } = useTheme();
 
   const checked = useSelector((state: IState) => state.switches.theme);
-  const theme = useSelector((state: IState) => state.theme);
 
   return (
     <ListItem className={classes.item}>
@@ -42,9 +42,7 @@ export const ThemeSwitch = () => {
         <Switch
           edge="end"
           onChange={() => {
-            const newTheme = theme === "light" ? "dark" : "light";
-
-            dispatch(changeTheme(newTheme));
+            toggleTheme();
 
             dispatch(toggleSwitch("theme"));
           }}

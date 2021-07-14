@@ -1,11 +1,20 @@
 import { createTheme } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { IState } from "../reducers";
 import { primary, secondary } from "./colors";
+import { changeTheme } from "../actions/theme";
 
-const useTheme = () => {
+export const useTheme = () => {
+  const dispatch = useDispatch();
+
   const stateTheme = useSelector((state: IState) => state.theme);
+
+  const toggleTheme = () => {
+    const newTheme = stateTheme === "light" ? "dark" : "light";
+
+    dispatch(changeTheme(newTheme));
+  };
 
   const theme = createTheme({
     palette: {
@@ -25,7 +34,5 @@ const useTheme = () => {
     },
   });
 
-  return { theme };
+  return { theme, toggleTheme };
 };
-
-export default useTheme;
