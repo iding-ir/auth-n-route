@@ -145,13 +145,13 @@ export const Sidebar = (props: IPropsSidebar) => {
           }
         };
 
-        return (
+        return item.showInSidebar ? (
           <div key={item.key}>
             {renderItem()}
 
             {renderCollapse()}
           </div>
-        );
+        ) : null;
       });
 
     return <List>{renderItems()}</List>;

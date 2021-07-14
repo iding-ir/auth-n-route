@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import LoginIcon from "@material-ui/icons/AccountBox";
-import InboxIcon from "@material-ui/icons/Inbox";
 import MultimediaIcon from "@material-ui/icons/PermMedia";
 import PhotoIcon from "@material-ui/icons/PhotoCamera";
 import VideoIcon from "@material-ui/icons/Movie";
@@ -12,7 +11,7 @@ import NotFoundIcon from "@material-ui/icons/PanTool";
 import * as URLS from "../constants/urls";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
-import { Multimedia } from "../pages/Multimedia";
+// import { Multimedia } from "../pages/Multimedia";
 import { Photo } from "../pages/Photo";
 import { Video } from "../pages/Video";
 import { Audio } from "../pages/Audio";
@@ -22,6 +21,8 @@ import { NotFound } from "../pages/NotFound";
 export interface IRoute {
   key: string;
   isPrivate: boolean;
+  isPublic: boolean;
+  showInSidebar: boolean;
   path?: string;
   label?: string;
   icon?: JSX.Element;
@@ -40,69 +41,85 @@ export type IRoutes = (IRoute | IRouteGroup)[];
 export const routes: IRoutes = [
   {
     key: "home",
-    isPrivate: false,
+    isPrivate: true,
+    isPublic: true,
+    showInSidebar: true,
     path: URLS.home,
     label: "sidebar.home",
     icon: <HomeIcon />,
-    component: Home,
+    component: <Home />,
     exact: true,
   },
   {
-    key: "login",
-    isPrivate: false,
-    path: URLS.login,
-    label: "sidebar.login",
-    icon: <LoginIcon />,
-    component: Login,
-  },
-  {
     key: "multimedia",
-    isPrivate: false,
-    path: URLS.multimedia,
+    isPrivate: true,
+    isPublic: true,
+    showInSidebar: true,
+    // path: URLS.multimedia,
     label: "sidebar.multimedia",
     icon: <MultimediaIcon />,
-    component: Multimedia,
+    // component: <Multimedia />,
     items: [
       {
         key: "photo",
-        isPrivate: false,
+        isPrivate: true,
+        isPublic: true,
+        showInSidebar: true,
         path: URLS.photo,
         label: "sidebar.photo",
         icon: <PhotoIcon />,
-        component: Photo,
+        component: <Photo />,
       },
       {
         key: "video",
-        isPrivate: false,
+        isPrivate: true,
+        isPublic: true,
+        showInSidebar: true,
         path: URLS.video,
         label: "sidebar.video",
         icon: <VideoIcon />,
-        component: Video,
+        component: <Video />,
       },
       {
         key: "audio",
-        isPrivate: false,
+        isPrivate: true,
+        isPublic: true,
+        showInSidebar: true,
         path: URLS.audio,
         label: "sidebar.audio",
         icon: <AudioIcon />,
-        component: Audio,
+        component: <Audio />,
       },
     ],
   },
   {
     key: "profile",
     isPrivate: true,
+    isPublic: false,
+    showInSidebar: true,
     path: URLS.profile,
     label: "sidebar.profile",
     icon: <ProfileIcon />,
-    component: Profile,
+    component: <Profile />,
+  },
+  {
+    key: "login",
+    isPrivate: false,
+    isPublic: true,
+    showInSidebar: true,
+    path: URLS.login,
+    label: "sidebar.login",
+    icon: <LoginIcon />,
+    component: <Login />,
   },
   {
     key: "not-found",
-    isPrivate: false,
+    isPrivate: true,
+    isPublic: true,
+    showInSidebar: false,
     path: URLS.notFound,
     label: "sidebar.notFound",
     icon: <NotFoundIcon />,
-    component: NotFound,
+    component: <NotFound />,
   },
 ];

@@ -21,25 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export const App = () => {
   const classes = useStyles();
 
-  // return (
-  //   <div className={classes.App}>
-  //     <Switch>
-  //       {routes.map((route: IRoute) => {
-  //         const { path, component, isPrivate, ...rest } = route;
-
-  //         return (
-  //           <AppRouter
-  //             path={path}
-  //             Component={component}
-  //             isPrivate={isPrivate}
-  //             {...rest}
-  //           />
-  //         );
-  //       })}
-  //     </Switch>
-  //   </div>
-  // );
-
   return (
     <Wrapper>
       <Header />

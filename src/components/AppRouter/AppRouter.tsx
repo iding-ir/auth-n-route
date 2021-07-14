@@ -1,48 +1,16 @@
-// import React from "react";
-// import { Redirect, Route } from "react-router-dom";
-
-// import { useAuth } from "../../hooks/useAuth";
-
-// interface Props {
-//   path: string | undefined;
-//   Component: any;
-//   isPrivate: boolean;
-// }
-
-// export const AppRouter = (props: Props) => {
-//   const { path, Component, isPrivate, ...rest } = props;
-
-//   const { auth } = useAuth();
-
-//   const { isLoggedIn } = auth;
-
-//   return (
-//     <Route
-//       path={path}
-//       render={(props) => {
-//         if (isPrivate && !isLoggedIn) {
-//           return <Redirect to={{ pathname: "/login" }} />;
-//         } else {
-//           return <Component {...props} />;
-//         }
-//       }}
-//       {...rest}
-//     />
-//   );
-// };
-
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
   HashRouter as Router,
   Switch,
   Route,
+  Redirect,
   RouteComponentProps,
 } from "react-router-dom";
 
 import { routes, IRoutes, IRoute, IRouteGroup } from "../../configs/routes";
+import { useAuth } from "../../hooks/useAuth";
 import { setPage } from "../../actions/page";
-import * as URLS from "../../constants/urls";
 
 interface IPropsAppRouter {
   children: JSX.Element;
@@ -50,6 +18,9 @@ interface IPropsAppRouter {
 
 export const AppRouter = (props: IPropsAppRouter) => {
   const dispatch = useDispatch();
+  const { auth } = useAuth();
+
+  const { isLoggedIn } = auth;
 
   const searchRoutes = (routes: IRoutes, url: string) => {
     let result: any = false;
@@ -77,8 +48,19 @@ export const AppRouter = (props: IPropsAppRouter) => {
   };
 
   const renderRoutes = () => {
-    return Object.values(URLS).map((url: string) => (
-      <Route key={url} exact path={url} render={pageRouteRenderer} />
+    return Object.values(routes).map((route: IRoute | IRouteGroup) => (
+      <Route
+        key={route.key}
+        exact
+        path={route.path}
+        render={(props) => {
+          if (route.isPrivate && !isLoggedIn) {
+            return <Redirect to={{ pathname: "/login" }} />;
+          } else {
+            return pageRouteRenderer;
+          }
+        }}
+      />
     ));
   };
 

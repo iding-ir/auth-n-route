@@ -25,7 +25,7 @@ export const Content = (props: IPropsContent) => {
     <main className={classes.content}>
       <div className={classes.toolbar} />
 
-      {selectedPage.content}
+      {selectedPage.component}
     </main>
   );
 };
