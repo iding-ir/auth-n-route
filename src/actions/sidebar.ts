@@ -12,6 +12,6 @@ export const closeSidebar = (): IAction => ({
   type: SIDEBAR_CLOSE,
 });
 
-export const sidebarToggle = (): IAction => ({
+export const toggleSidebar = (): IAction => ({
   type: SIDEBAR_TOGGLE,
 });
