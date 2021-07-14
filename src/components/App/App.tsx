@@ -2,8 +2,9 @@ import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Switch } from "react-router-dom";
 
-import { AppRoutes } from "../AppRoutes";
+import { AppRouter } from "../AppRouter";
 import { routes, IRoute } from "../../configs/routes";
+import { Wrapper } from "../Wrapper";
 import { Header } from "../Header";
 import { Sidebar } from "../Sidebar";
 import { Content } from "../Content";
@@ -27,7 +28,7 @@ export const App = () => {
   //         const { path, component, isPrivate, ...rest } = route;
 
   //         return (
-  //           <AppRoutes
+  //           <AppRouter
   //             path={path}
   //             Component={component}
   //             isPrivate={isPrivate}
@@ -40,12 +41,12 @@ export const App = () => {
   // );
 
   return (
-    <div>
+    <Wrapper>
       <Header />
 
       <Sidebar />
 
       <Content />
-    </div>
+    </Wrapper>
   );
 };

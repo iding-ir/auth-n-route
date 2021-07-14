@@ -1,21 +1,31 @@
-import { createTheme, ThemeOptions } from "@material-ui/core";
-import { amber, teal, grey } from "@material-ui/core/colors";
+import { createTheme } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 
-const themeOptions: ThemeOptions = {
-  palette: {
-    primary: {
-      light: teal[500],
-      main: teal[700],
-      dark: teal[900],
-      contrastText: grey[50],
+import { IState } from "../reducers";
+import { primary, secondary } from "./colors";
+
+const useTheme = () => {
+  const stateTheme = useSelector((state: IState) => state.theme);
+
+  const theme = createTheme({
+    palette: {
+      type: stateTheme,
+      primary: {
+        light: primary[200],
+        main: primary[400],
+        dark: primary[800],
+        contrastText: stateTheme === "dark" ? "#ffffff" : "#000000",
+      },
+      secondary: {
+        light: secondary[200],
+        main: secondary[400],
+        dark: secondary[800],
+        contrastText: stateTheme === "dark" ? "#000000" : "#ffffff",
+      },
     },
-    secondary: {
-      light: amber[500],
-      main: amber[700],
-      dark: amber[900],
-      contrastText: grey[900],
-    },
-  },
+  });
+
+  return { theme };
 };
 
-export const theme = createTheme(themeOptions);
+export default useTheme;
