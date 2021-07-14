@@ -12,6 +12,8 @@ const localization = {
     video: "Video",
     audio: "Audio",
     profile: "Profile",
+    inbox: "Inbox",
+    services: "Services",
     schedule: "Schedule",
     theme: "Theme",
     settings: "Settings",

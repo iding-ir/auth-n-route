@@ -5,10 +5,12 @@ import PhotoIcon from "@material-ui/icons/PhotoCamera";
 import VideoIcon from "@material-ui/icons/Movie";
 import AudioIcon from "@material-ui/icons/Audiotrack";
 import ProfileIcon from "@material-ui/icons/Person";
+import InboxIcon from "@material-ui/icons/Email";
+import ServicesIcon from "@material-ui/icons/Assessment";
+import ScheduleIcon from "@material-ui/icons/Alarm";
 import LoginIcon from "@material-ui/icons/AccountBox";
 import LogoutIcon from "@material-ui/icons/MeetingRoom";
 import NotFoundIcon from "@material-ui/icons/PanTool";
-import ScheduleIcon from "@material-ui/icons/Alarm";
 
 import * as URLS from "../constants/urls";
 import { Home } from "../pages/Home";
@@ -16,7 +18,9 @@ import { Home } from "../pages/Home";
 import { Photo } from "../pages/Photo";
 import { Video } from "../pages/Video";
 import { Audio } from "../pages/Audio";
-import { Profile } from "../pages/Profile";
+// import { Profile } from "../pages/Profile";
+import { Inbox } from "../pages/Inbox";
+import { Services } from "../pages/Services";
 import { Login } from "../pages/Login";
 import { Logout } from "../pages/Logout";
 import { NotFound } from "../pages/NotFound";
@@ -32,7 +36,6 @@ export interface IRoute {
   label?: string;
   icon?: JSX.Element;
   component?: ReactNode;
-  exact?: boolean;
   action?: () => void;
   custom?: JSX.Element;
 }
@@ -53,7 +56,6 @@ export const routes: IRoutes = [
     label: "sidebar.home",
     icon: <HomeIcon />,
     component: <Home />,
-    exact: true,
   },
   {
     key: "multimedia",
@@ -102,10 +104,32 @@ export const routes: IRoutes = [
     showPrivate: true,
     showPublic: false,
     showInSidebar: true,
-    path: URLS.URL_PROFILE,
+    // path: URLS.URL_PROFILE,
     label: "sidebar.profile",
     icon: <ProfileIcon />,
-    component: <Profile />,
+    // component: <Profile />,
+    items: [
+      {
+        key: "inbox",
+        showPrivate: true,
+        showPublic: false,
+        showInSidebar: true,
+        path: URLS.URL_INBOX,
+        label: "sidebar.inbox",
+        icon: <InboxIcon />,
+        component: <Inbox />,
+      },
+      {
+        key: "services",
+        showPrivate: true,
+        showPublic: false,
+        showInSidebar: true,
+        path: URLS.URL_SERVICES,
+        label: "sidebar.services",
+        icon: <ServicesIcon />,
+        component: <Services />,
+      },
+    ],
   },
   {
     key: "schedule",
@@ -161,7 +185,6 @@ export const routes: IRoutes = [
     label: "sidebar.notFound",
     icon: <NotFoundIcon />,
     component: <NotFound />,
-    exact: false,
   },
 ];
 
