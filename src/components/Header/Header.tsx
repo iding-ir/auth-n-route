@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface IPropsHeader {}
+interface IProps {}
 
-export const Header = (props: IPropsHeader) => {
+export const Header = (props: IProps) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();

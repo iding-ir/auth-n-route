@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface IPropsContent {}
+interface IProps {}
 
-export const Content = (props: IPropsContent) => {
+export const Content = (props: IProps) => {
   const classes = useStyles();
 
   const selectedPage = useSelector((state: IState) => state.page.selected);
