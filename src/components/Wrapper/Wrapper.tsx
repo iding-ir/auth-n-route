@@ -1,13 +1,36 @@
 import React, { ReactNode } from "react";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { CssBaseline, ThemeProvider } from "@material-ui/core";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { CssBaseline } from "@material-ui/core";
 
-import { useTheme } from "../../themes";
 import { AppRouter } from "../AppRouter";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
+    "@global": {
+      "*": {
+        scrollbarColor: `${theme.palette.primary.dark} ${theme.palette.grey[600]}`,
+        scrollbarWidth: "thin",
+      },
+
+      "* ::-webkit-scrollbar": {
+        width: theme.spacing(1),
+      },
+
+      "* ::-webkit-scrollbar-track": {
+        background: theme.palette.grey[600],
+      },
+
+      "* ::-webkit-scrollbar-thumb": {
+        borderRadius: theme.spacing(1),
+        background: theme.palette.primary.dark,
+        transition: "all ease 0.3s",
+      },
+
+      "* ::-webkit-scrollbar-thumb:hover": {
+        background: theme.palette.primary.dark,
+      },
+    },
+    wrapper: {
       display: "flex",
       height: "100%",
     },
@@ -20,17 +43,14 @@ interface IProps {
 
 export const Wrapper = (props: IProps) => {
   const classes = useStyles();
-  const { theme } = useTheme();
 
   return (
-    <AppRouter>
-      <ThemeProvider theme={theme}>
-        <div className={classes.root}>
-          <CssBaseline />
+    <div className={classes.wrapper}>
+      <AppRouter>
+        <CssBaseline />
 
-          {props.children}
-        </div>
-      </ThemeProvider>
-    </AppRouter>
+        {props.children}
+      </AppRouter>
+    </div>
   );
 };

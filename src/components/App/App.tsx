@@ -1,6 +1,8 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core";
 
+import { useTheme } from "../../themes";
 import { Wrapper } from "../Wrapper";
 import { Header } from "../Header";
 import { Sidebar } from "../Sidebar";
@@ -19,16 +21,19 @@ interface IProps {}
 
 export const App = (props: IProps) => {
   const classes = useStyles();
+  const { theme } = useTheme();
 
   return (
     <div className={classes.App}>
-      <Wrapper>
-        <Header />
+      <ThemeProvider theme={theme}>
+        <Wrapper>
+          <Header />
 
-        <Sidebar />
+          <Sidebar />
 
-        <Content />
-      </Wrapper>
+          <Content />
+        </Wrapper>
+      </ThemeProvider>
     </div>
   );
 };

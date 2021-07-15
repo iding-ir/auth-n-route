@@ -2,7 +2,7 @@ import { createTheme } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 
 import { IState } from "../reducers";
-import { primary, secondary } from "./colors";
+import { primary, secondary, grey } from "./colors";
 import { changeTheme } from "../actions/theme";
 
 export const useTheme = () => {
@@ -20,16 +20,16 @@ export const useTheme = () => {
     palette: {
       type: stateTheme,
       primary: {
-        light: primary[200],
-        main: primary[400],
+        light: primary[400],
+        main: primary[600],
         dark: primary[800],
-        contrastText: stateTheme === "dark" ? "#ffffff" : "#000000",
+        contrastText: stateTheme === "dark" ? grey[50] : grey[900],
       },
       secondary: {
-        light: secondary[200],
-        main: secondary[400],
+        light: secondary[400],
+        main: secondary[600],
         dark: secondary[800],
-        contrastText: stateTheme === "dark" ? "#000000" : "#ffffff",
+        contrastText: stateTheme === "dark" ? grey[900] : grey[50],
       },
     },
   });
