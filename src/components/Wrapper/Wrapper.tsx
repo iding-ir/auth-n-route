@@ -3,33 +3,11 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 
 import { AppRouter } from "../AppRouter";
+import { styles } from "../../themes/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    "@global": {
-      "*": {
-        scrollbarColor: `${theme.palette.primary.dark} rgba(0, 0, 0, 0)`,
-        scrollbarWidth: "thin",
-      },
-
-      "* ::-webkit-scrollbar": {
-        width: theme.spacing(1),
-      },
-
-      "* ::-webkit-scrollbar-track": {
-        background: "rgba(0, 0, 0, 0)",
-      },
-
-      "* ::-webkit-scrollbar-thumb": {
-        borderRadius: theme.spacing(1),
-        background: theme.palette.primary.dark,
-        transition: "all ease 0.3s",
-      },
-
-      "* ::-webkit-scrollbar-thumb:hover": {
-        background: theme.palette.primary.dark,
-      },
-    },
+    ...styles(theme),
     wrapper: {
       display: "flex",
       height: "100%",
