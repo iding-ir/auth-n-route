@@ -89,8 +89,8 @@ export const Sidebar = (props: IProps) => {
   };
 
   const renderList = (list: IRoutes, nested: boolean) => {
-    const renderItems = () =>
-      list.map((item: IRoute | IRouteGroup) => {
+    const renderItems = () => {
+      return list.map((item: IRoute | IRouteGroup) => {
         const className = clsx(classes.item, {
           [classes.nested]: nested,
           [classes.selected]: selectedPage.key === item.key,
@@ -165,6 +165,7 @@ export const Sidebar = (props: IProps) => {
           </div>
         ) : null;
       });
+    };
 
     return <List>{renderItems()}</List>;
   };
