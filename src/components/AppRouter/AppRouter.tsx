@@ -38,6 +38,12 @@ export const AppRouter = (props: IProps) => {
       }
     });
 
+    result =
+      result ||
+      routes.find((route: IRoute | IRouteGroup) => {
+        return route.path === URLS.URL_NOT_FOUND;
+      });
+
     return result;
   };
 
