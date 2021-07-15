@@ -6,6 +6,7 @@ const localization = {
   },
   sidebar: {
     title: "Auth N Route",
+    footer: "2020-2021",
     home: "Home",
     multimedia: "Multimedia",
     photo: "Photo",

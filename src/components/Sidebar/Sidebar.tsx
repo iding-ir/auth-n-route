@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import {
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100%",
       "& ul": {
         overflow: "auto",
+        flexGrow: 10,
       },
     },
     drawer: {
@@ -49,6 +50,23 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
       alignItems: "center",
       ...theme.mixins.toolbar,
+    },
+    logo: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "0 0.5rem",
+      "& svg": {
+        height: "2.5rem",
+        width: "auto",
+      },
+    },
+    title: {
+      padding: "0 0.5rem",
+    },
+    footer: {
+      fontSize: "1rem",
+      padding: "0 0.5rem",
     },
     drawerPaper: {
       width: SIDEBAR_WIDTH,
@@ -73,9 +91,14 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps {
+  title?: ReactNode;
+  logo?: ReactNode;
+  footer?: ReactNode;
+}
 
 export const Sidebar = (props: IProps) => {
+  const { title, logo, footer } = props;
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -180,11 +203,21 @@ export const Sidebar = (props: IProps) => {
 
   const drawer = (
     <div className={classes.wrapper}>
-      <div className={classes.toolbar}>{t("sidebar.title")}</div>
+      <div className={classes.toolbar}>
+        <div className={classes.logo}>{logo}</div>
+
+        <div className={classes.title}>{title}</div>
+      </div>
 
       <Divider />
 
       {renderList(routes, false)}
+
+      <Divider />
+
+      <div className={classes.toolbar}>
+        <div className={classes.footer}>{footer}</div>
+      </div>
     </div>
   );
 
