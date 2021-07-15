@@ -28,6 +28,14 @@ import { useAuth } from "../../hooks/useAuth";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    wrapper: {
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
+      "& ul": {
+        overflow: "auto",
+      },
+    },
     drawer: {
       [theme.breakpoints.up("sm")]: {
         width: SIDEBAR_WIDTH,
@@ -171,7 +179,7 @@ export const Sidebar = (props: IProps) => {
   };
 
   const drawer = (
-    <div>
+    <div className={classes.wrapper}>
       <div className={classes.toolbar}>{t("sidebar.title")}</div>
 
       <Divider />

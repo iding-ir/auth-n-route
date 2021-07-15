@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     "@global": {
       "*": {
-        scrollbarColor: `${theme.palette.primary.dark} ${theme.palette.grey[600]}`,
+        scrollbarColor: `${theme.palette.primary.dark} rgba(0, 0, 0, 0)`,
         scrollbarWidth: "thin",
       },
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
 
       "* ::-webkit-scrollbar-track": {
-        background: theme.palette.grey[600],
+        background: "rgba(0, 0, 0, 0)",
       },
 
       "* ::-webkit-scrollbar-thumb": {
