@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   createStyles,
   Theme,
@@ -14,6 +14,12 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import { useTranslation } from "react-i18next";
+
+import {
+  MODAL_WIDTH_SM,
+  MODAL_WIDTH_MD,
+  MODAL_WIDTH_LG,
+} from "../../constants/config";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -31,7 +37,7 @@ const styles = (theme: Theme) =>
 
 export interface DialogTitleProps extends WithStyles<typeof styles> {
   id: string;
-  children: React.ReactNode;
+  children: ReactNode;
   onClose: () => void;
 }
 
@@ -58,12 +64,12 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
 const DialogContent = withStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(2),
-    minWidth: "240px",
+    minWidth: MODAL_WIDTH_SM,
     [theme.breakpoints.up("sm")]: {
-      minWidth: "360px",
+      minWidth: MODAL_WIDTH_MD,
     },
     [theme.breakpoints.up("md")]: {
-      minWidth: "480px",
+      minWidth: MODAL_WIDTH_LG,
     },
   },
 }))(MuiDialogContent);
@@ -75,16 +81,17 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions);
 
-interface IPropsModal {
+interface IProps {
   open: boolean;
   title: string;
-  content: JSX.Element;
-  toolbar?: JSX.Element;
+  content: ReactNode;
+  toolbar?: ReactNode;
   handleClose: () => void;
 }
 
-export const Modal = (props: IPropsModal) => {
+export const Modal = (props: IProps) => {
   const { open, title, content, toolbar, handleClose } = props;
+
   const { t } = useTranslation();
 
   const renderToolbar = () =>
@@ -95,16 +102,14 @@ export const Modal = (props: IPropsModal) => {
     );
 
   return (
-    <div>
-      <Dialog onClose={handleClose} aria-labelledby="dialog-title" open={open}>
-        <DialogTitle id="dialog-title" onClose={handleClose}>
-          {title}
-        </DialogTitle>
+    <Dialog onClose={handleClose} aria-labelledby="dialog-title" open={open}>
+      <DialogTitle id="dialog-title" onClose={handleClose}>
+        {title}
+      </DialogTitle>
 
-        <DialogContent dividers>{content}</DialogContent>
+      <DialogContent dividers>{content}</DialogContent>
 
-        <DialogActions>{renderToolbar()}</DialogActions>
-      </Dialog>
-    </div>
+      <DialogActions>{renderToolbar()}</DialogActions>
+    </Dialog>
   );
 };

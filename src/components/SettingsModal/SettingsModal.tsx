@@ -31,17 +31,6 @@ export const SettingsModal = () => {
     setOpen(false);
   };
 
-  const renderModal = () => {
-    return (
-      <Modal
-        open={open}
-        title={t("modal.title")}
-        content={<div>{t("modal.content")}</div>}
-        handleClose={handleClose}
-      />
-    );
-  };
-
   return (
     <>
       <ListItem button className={classes.item} onClick={handleOpen}>
@@ -52,7 +41,12 @@ export const SettingsModal = () => {
         <ListItemText primary={t("sidebar.settings")} />
       </ListItem>
 
-      {renderModal()}
+      <Modal
+        open={open}
+        title={t("modal.title")}
+        content={<div>{t("modal.content")}</div>}
+        handleClose={handleClose}
+      />
     </>
   );
 };
