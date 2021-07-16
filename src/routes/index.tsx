@@ -68,10 +68,10 @@ export const routes: IRoutes = [
     showPrivate: true,
     showPublic: true,
     showInSidebar: true,
-    path: URLS.URL_MULTIMEDIA,
+    // path: URLS.URL_MULTIMEDIA,
     label: "sidebar.multimedia",
     icon: <MultimediaIcon />,
-    component: <Multimedia />,
+    // component: <Multimedia />,
     items: [
       {
         key: "photos",
@@ -132,10 +132,10 @@ export const routes: IRoutes = [
     showPrivate: true,
     showPublic: false,
     showInSidebar: true,
-    path: URLS.URL_PROFILE,
+    // path: URLS.URL_PROFILE,
     label: "sidebar.profile",
     icon: <ProfileIcon />,
-    component: <Profile />,
+    // component: <Profile />,
     items: [
       {
         key: "inbox",
