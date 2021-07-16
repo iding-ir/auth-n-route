@@ -1,10 +1,10 @@
 export const URL_HOME = "/";
 export const URL_MULTIMEDIA = "/multimedia";
-export const URL_PHOTO = "/multimedia/photo";
-export const URL_PHOTO_PUBLIC = "/multimedia/photo/public";
-export const URL_PHOTO_PRIVATE = "/multimedia/photo/private";
-export const URL_VIDEO = "/multimedia/video";
-export const URL_AUDIO = "/multimedia/audio";
+export const URL_PHOTOS = "/multimedia/photos";
+export const URL_PHOTOS_PUBLIC = "/multimedia/photos/public";
+export const URL_PHOTOS_PRIVATE = "/multimedia/photos/private";
+export const URL_VIDEOS = "/multimedia/videos";
+export const URL_AUDIOS = "/multimedia/audios";
 export const URL_PROFILE = "/profile";
 export const URL_INBOX = "/profile/inbox";
 export const URL_SERVICES = "/profile/services";

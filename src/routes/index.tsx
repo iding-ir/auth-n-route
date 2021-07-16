@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import MultimediaIcon from "@material-ui/icons/PermMedia";
-import PhotoIcon from "@material-ui/icons/PhotoCamera";
-import PublicPhotoIcon from "@material-ui/icons/LockOpen";
-import PrivatePhotoIcon from "@material-ui/icons/Lock";
+import PhotosIcon from "@material-ui/icons/PhotoCamera";
+import PublicPhotosIcon from "@material-ui/icons/LockOpen";
+import PrivatePhotosIcon from "@material-ui/icons/Lock";
 import VideoIcon from "@material-ui/icons/Movie";
 import AudioIcon from "@material-ui/icons/Audiotrack";
 import ProfileIcon from "@material-ui/icons/Person";
@@ -17,11 +17,11 @@ import NotFoundIcon from "@material-ui/icons/PanTool";
 import * as URLS from "../constants/urls";
 import { Home } from "../pages/Home";
 import { Multimedia } from "../pages/Multimedia";
-import { Photo } from "../pages/Multimedia/Photo";
-import { PublicPhoto } from "../pages/Multimedia/Photo/PublicPhoto";
-import { PrivatePhoto } from "../pages/Multimedia/Photo/PrivatePhoto";
-import { Video } from "../pages/Multimedia/Video";
-import { Audio } from "../pages/Multimedia/Audio";
+import { Photos } from "../pages/Multimedia/Photos";
+import { PublicPhotos } from "../pages/Multimedia/Photos/Public";
+import { PrivatePhotos } from "../pages/Multimedia/Photos/Private";
+import { Video } from "../pages/Multimedia/Videos";
+import { Audio } from "../pages/Multimedia/Audios";
 import { Profile } from "../pages/Profile";
 import { Inbox } from "../pages/Profile/Inbox";
 import { Services } from "../pages/Profile/Services";
@@ -74,54 +74,54 @@ export const routes: IRoutes = [
     component: <Multimedia />,
     items: [
       {
-        key: "photo",
+        key: "photos",
         showPrivate: true,
         showPublic: true,
         showInSidebar: true,
-        path: URLS.URL_PHOTO,
-        label: "sidebar.photo",
-        icon: <PhotoIcon />,
-        component: <Photo />,
+        path: URLS.URL_PHOTOS,
+        label: "sidebar.photos",
+        icon: <PhotosIcon />,
+        component: <Photos />,
         items: [
           {
-            key: "public-photo",
+            key: "public-photos",
             showPrivate: true,
             showPublic: true,
             showInSidebar: true,
-            path: URLS.URL_PHOTO_PUBLIC,
-            label: "sidebar.publicPhoto",
-            icon: <PublicPhotoIcon />,
-            component: <PublicPhoto />,
+            path: URLS.URL_PHOTOS_PUBLIC,
+            label: "sidebar.publicPhotos",
+            icon: <PublicPhotosIcon />,
+            component: <PublicPhotos />,
           },
           {
-            key: "private-photo",
+            key: "private-photos",
             showPrivate: true,
             showPublic: false,
             showInSidebar: true,
-            path: URLS.URL_PHOTO_PRIVATE,
-            label: "sidebar.privatePhoto",
-            icon: <PrivatePhotoIcon />,
-            component: <PrivatePhoto />,
+            path: URLS.URL_PHOTOS_PRIVATE,
+            label: "sidebar.privatePhotos",
+            icon: <PrivatePhotosIcon />,
+            component: <PrivatePhotos />,
           },
         ],
       },
       {
-        key: "video",
+        key: "videos",
         showPrivate: true,
         showPublic: true,
         showInSidebar: true,
-        path: URLS.URL_VIDEO,
-        label: "sidebar.video",
+        path: URLS.URL_VIDEOS,
+        label: "sidebar.videos",
         icon: <VideoIcon />,
         component: <Video />,
       },
       {
-        key: "audio",
+        key: "audios",
         showPrivate: true,
         showPublic: true,
         showInSidebar: true,
-        path: URLS.URL_AUDIO,
-        label: "sidebar.audio",
+        path: URLS.URL_AUDIOS,
+        label: "sidebar.audios",
         icon: <AudioIcon />,
         component: <Audio />,
       },
