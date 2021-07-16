@@ -12,10 +12,7 @@ import { ReactComponent as Logo } from "../../assets/images/logo.svg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    App: {
-      width: "100%",
-      height: "100%",
-    },
+    App: {},
   })
 );
 

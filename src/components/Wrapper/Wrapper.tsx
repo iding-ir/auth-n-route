@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 
-import { AppRouter } from "../AppRouter";
+import { Router } from "../Router";
 import { styles } from "../../themes/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,11 +24,11 @@ export const Wrapper = (props: IProps) => {
 
   return (
     <div className={classes.wrapper}>
-      <AppRouter>
+      <Router>
         <CssBaseline />
 
         {props.children}
-      </AppRouter>
+      </Router>
     </div>
   );
 };

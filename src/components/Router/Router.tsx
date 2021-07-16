@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { useDispatch } from "react-redux";
 import {
-  HashRouter as Router,
+  HashRouter,
   Switch,
   Route,
   Redirect,
@@ -17,7 +17,7 @@ interface IProps {
   children: ReactNode;
 }
 
-export const AppRouter = (props: IProps) => {
+export const Router = (props: IProps) => {
   const { children } = props;
 
   const dispatch = useDispatch();
@@ -76,10 +76,10 @@ export const AppRouter = (props: IProps) => {
   };
 
   return (
-    <Router>
+    <HashRouter>
       <Switch>{renderRoutes()}</Switch>
 
       {children}
-    </Router>
+    </HashRouter>
   );
 };
