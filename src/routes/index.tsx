@@ -32,6 +32,7 @@ export interface IRoute {
   showPrivate: boolean;
   showPublic: boolean;
   showInSidebar: boolean;
+  exact?: boolean;
   path?: string;
   label?: string;
   icon?: JSX.Element;
@@ -52,6 +53,7 @@ export const routes: IRoutes = [
     showPrivate: true,
     showPublic: true,
     showInSidebar: true,
+    exact: true,
     path: URLS.URL_HOME,
     label: "sidebar.home",
     icon: <HomeIcon />,
@@ -189,3 +191,16 @@ export const routes: IRoutes = [
 ];
 
 export const iRoute: IRoute | IRouteGroup = routes[0];
+
+export const flatRoutes = (routes: IRoutes) => {
+  let result: IRoute[] = [];
+
+  routes.forEach((route) => {
+    result =
+      "items" in route
+        ? [...result, ...flatRoutes(route.items)]
+        : [...result, route];
+  });
+
+  return result;
+};

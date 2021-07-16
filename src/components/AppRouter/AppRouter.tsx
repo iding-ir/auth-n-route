@@ -8,7 +8,7 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 
-import { routes, IRoutes, IRoute, IRouteGroup } from "../../routes";
+import { routes, IRoutes, IRoute, IRouteGroup, flatRoutes } from "../../routes";
 import { useAuth } from "../../hooks/useAuth";
 import { setPage } from "../../actions/page";
 import * as URLS from "../../constants/urls";
@@ -63,12 +63,12 @@ export const AppRouter = (props: IProps) => {
   };
 
   const renderRoutes = () => {
-    return Object.values(URLS).map((url: string) => {
+    return flatRoutes(routes).map((route: IRoute) => {
       return (
         <Route
-          key={url}
-          exact
-          path={url}
+          key={route.key}
+          exact={route.exact}
+          path={route.path}
           render={(props) => pageRouteRenderer(props)}
         />
       );
