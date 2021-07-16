@@ -38,11 +38,11 @@ export const Router = (props: IProps) => {
       }
     });
 
-    result =
-      result ||
-      routes.find((route: IRoute | IRouteGroup) => {
-        return route.path === URLS.URL_NOT_FOUND;
-      });
+    const notFoundRoute = flatRoutes(routes).find(
+      (route: IRoute) => route.path === URLS.URL_NOT_FOUND
+    );
+
+    result = result || notFoundRoute;
 
     return result;
   };
