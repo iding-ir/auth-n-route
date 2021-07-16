@@ -2,6 +2,8 @@ import React, { ReactNode } from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import MultimediaIcon from "@material-ui/icons/PermMedia";
 import PhotoIcon from "@material-ui/icons/PhotoCamera";
+import PublicPhotoIcon from "@material-ui/icons/LockOpen";
+import PrivatePhotoIcon from "@material-ui/icons/Lock";
 import VideoIcon from "@material-ui/icons/Movie";
 import AudioIcon from "@material-ui/icons/Audiotrack";
 import ProfileIcon from "@material-ui/icons/Person";
@@ -14,13 +16,15 @@ import NotFoundIcon from "@material-ui/icons/PanTool";
 
 import * as URLS from "../constants/urls";
 import { Home } from "../pages/Home";
-// import { Multimedia } from "../pages/Multimedia";
-import { Photo } from "../pages/Photo";
-import { Video } from "../pages/Video";
-import { Audio } from "../pages/Audio";
-// import { Profile } from "../pages/Profile";
-import { Inbox } from "../pages/Inbox";
-import { Services } from "../pages/Services";
+import { Multimedia } from "../pages/Multimedia";
+import { Photo } from "../pages/Multimedia/Photo";
+import { PublicPhoto } from "../pages/Multimedia/Photo/PublicPhoto";
+import { PrivatePhoto } from "../pages/Multimedia/Photo/PrivatePhoto";
+import { Video } from "../pages/Multimedia/Video";
+import { Audio } from "../pages/Multimedia/Audio";
+import { Profile } from "../pages/Profile";
+import { Inbox } from "../pages/Profile/Inbox";
+import { Services } from "../pages/Profile/Services";
 import { Login } from "../pages/Login";
 import { Logout } from "../pages/Logout";
 import { NotFound } from "../pages/NotFound";
@@ -64,10 +68,10 @@ export const routes: IRoutes = [
     showPrivate: true,
     showPublic: true,
     showInSidebar: true,
-    // path: URLS.URL_MULTIMEDIA,
+    path: URLS.URL_MULTIMEDIA,
     label: "sidebar.multimedia",
     icon: <MultimediaIcon />,
-    // component: <Multimedia />,
+    component: <Multimedia />,
     items: [
       {
         key: "photo",
@@ -78,6 +82,28 @@ export const routes: IRoutes = [
         label: "sidebar.photo",
         icon: <PhotoIcon />,
         component: <Photo />,
+        items: [
+          {
+            key: "public-photo",
+            showPrivate: true,
+            showPublic: true,
+            showInSidebar: true,
+            path: URLS.URL_PHOTO_PUBLIC,
+            label: "sidebar.publicPhoto",
+            icon: <PublicPhotoIcon />,
+            component: <PublicPhoto />,
+          },
+          {
+            key: "private-photo",
+            showPrivate: true,
+            showPublic: false,
+            showInSidebar: true,
+            path: URLS.URL_PHOTO_PRIVATE,
+            label: "sidebar.privatePhoto",
+            icon: <PrivatePhotoIcon />,
+            component: <PrivatePhoto />,
+          },
+        ],
       },
       {
         key: "video",
@@ -106,10 +132,10 @@ export const routes: IRoutes = [
     showPrivate: true,
     showPublic: false,
     showInSidebar: true,
-    // path: URLS.URL_PROFILE,
+    path: URLS.URL_PROFILE,
     label: "sidebar.profile",
     icon: <ProfileIcon />,
-    // component: <Profile />,
+    component: <Profile />,
     items: [
       {
         key: "inbox",
@@ -141,7 +167,7 @@ export const routes: IRoutes = [
     label: "sidebar.schedule",
     icon: <ScheduleIcon />,
     action: () => {
-      alert();
+      alert("Custom action");
     },
   },
   {

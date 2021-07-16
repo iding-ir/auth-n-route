@@ -10,6 +10,8 @@ const localization = {
     home: "Home",
     multimedia: "Multimedia",
     photo: "Photo",
+    publicPhoto: "Public Photo",
+    privatePhoto: "Private Photo",
     video: "Video",
     audio: "Audio",
     profile: "Profile",
