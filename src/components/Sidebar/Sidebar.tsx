@@ -57,8 +57,11 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       padding: "0 0.5rem",
       "& svg": {
-        height: "2.5rem",
+        height: "2rem",
         width: "auto",
+        [theme.breakpoints.up("sm")]: {
+          height: "2.5rem",
+        },
       },
     },
     title: {
