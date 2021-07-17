@@ -8,17 +8,11 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 
-import {
-  routes,
-  IRoutes,
-  IRoute,
-  IRouteGroup,
-  flatRoutes,
-  getRoute,
-} from "../../routes";
+import { routes, IRoute, flatRoutes } from "../../routes";
 import { useAuth } from "../../hooks/useAuth";
 import { setPage } from "../../actions/page";
 import * as URLS from "../../constants/urls";
+import { useRouter } from "./useRouter";
 
 interface IProps {
   children: ReactNode;
@@ -28,29 +22,10 @@ export const Router = (props: IProps) => {
   const { children } = props;
 
   const dispatch = useDispatch();
+  const { searchRoutes } = useRouter();
   const { auth } = useAuth();
 
   const { isLoggedIn } = auth;
-
-  const searchRoutes = (routes: IRoutes, pathname: string) => {
-    let result: any = false;
-
-    routes.forEach((route: IRoute | IRouteGroup) => {
-      if (route.path === pathname) {
-        result = route;
-      }
-
-      if ("items" in route && !result) {
-        result = searchRoutes(route.items, pathname);
-      }
-    });
-
-    const notFoundRoute = getRoute(URLS.URL_NOT_FOUND);
-
-    result = result || notFoundRoute;
-
-    return result;
-  };
 
   const pageRouteRenderer = (props: RouteComponentProps) => {
     const { location } = props;
