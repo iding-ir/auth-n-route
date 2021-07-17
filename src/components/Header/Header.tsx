@@ -8,30 +8,31 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { useTranslation } from "react-i18next";
 
-import { SIDEBAR_WIDTH } from "../../constants/config";
 import { openSidebar } from "../../actions/sidebar";
 import { IState } from "../../reducers";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    appBar: {
-      [theme.breakpoints.up("md")]: {
-        width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
-        marginLeft: SIDEBAR_WIDTH,
-      },
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up("md")]: {
-        display: "none",
-      },
-    },
-  })
-);
 
 interface IProps {}
 
 export const Header = (props: IProps) => {
+  const sidebarWidth = useSelector((state: IState) => state.sidebar.width);
+
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      appBar: {
+        [theme.breakpoints.up("md")]: {
+          width: `calc(100% - ${sidebarWidth}px)`,
+          marginLeft: sidebarWidth,
+        },
+      },
+      menuButton: {
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.up("md")]: {
+          display: "none",
+        },
+      },
+    })
+  );
+
   const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();

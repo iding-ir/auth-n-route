@@ -2,10 +2,12 @@ import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
   SIDEBAR_TOGGLE,
+  SIDEBAR_RESIZE,
 } from "../constants/redux";
 
 export interface IAction {
   type: string;
+  payload?: { width: number };
 }
 
 export const openSidebar = (): IAction => ({
@@ -18,4 +20,9 @@ export const closeSidebar = (): IAction => ({
 
 export const toggleSidebar = (): IAction => ({
   type: SIDEBAR_TOGGLE,
+});
+
+export const resizeSidebar = (width: number): IAction => ({
+  type: SIDEBAR_RESIZE,
+  payload: { width },
 });

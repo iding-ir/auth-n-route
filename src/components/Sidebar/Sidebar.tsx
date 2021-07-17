@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { useCallback, ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import {
@@ -20,80 +20,12 @@ import Collapse from "@material-ui/core/Collapse";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { SIDEBAR_WIDTH } from "../../constants/config";
-import { closeSidebar } from "../../actions/sidebar";
+import { closeSidebar, resizeSidebar } from "../../actions/sidebar";
 import { routes, IRoute, IRouteGroup, IRoutes } from "../../routes";
 import { IState } from "../../reducers";
 import { useAuth } from "../../hooks/useAuth";
 import { toggleItem } from "../../actions/items";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    wrapper: {
-      display: "flex",
-      flexDirection: "column",
-      height: "100%",
-      "& ul": {
-        overflow: "auto",
-        flexGrow: 10,
-      },
-    },
-    drawer: {
-      [theme.breakpoints.up("md")]: {
-        width: SIDEBAR_WIDTH,
-        flexShrink: 0,
-      },
-    },
-    // necessary for content to be below app bar
-    toolbar: {
-      fontSize: "1.2rem",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      ...theme.mixins.toolbar,
-    },
-    logo: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "0 0.5rem",
-      "& svg": {
-        height: "2rem",
-        width: "auto",
-        [theme.breakpoints.up("md")]: {
-          height: "2.5rem",
-        },
-      },
-    },
-    title: {
-      padding: "0 0.5rem",
-    },
-    footer: {
-      fontSize: "1rem",
-      padding: "0 0.5rem",
-    },
-    drawerPaper: {
-      width: SIDEBAR_WIDTH,
-    },
-    item: {
-      borderLeft: "3px solid",
-      borderColor: "transparent",
-    },
-    nested: {
-      paddingLeft: theme.spacing(4),
-    },
-    selected: {
-      borderLeft: "3px solid",
-      borderColor: theme.palette.secondary.main,
-    },
-    link: {
-      display: "flex",
-      width: "100%",
-      textDecoration: "none",
-      color: theme.palette.primary.contrastText,
-    },
-  })
-);
+import { SIDEBAR_WIDTH_MIN, SIDEBAR_WIDTH_MAX } from "../../constants/config";
 
 interface IProps {
   title?: ReactNode;
@@ -102,6 +34,87 @@ interface IProps {
 }
 
 export const Sidebar = (props: IProps) => {
+  const sidebarWidth = useSelector((state: IState) => state.sidebar.width);
+
+  const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+      wrapper: {
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        "& ul": {
+          overflow: "auto",
+          flexGrow: 10,
+        },
+      },
+      drawer: {
+        [theme.breakpoints.up("md")]: {
+          width: sidebarWidth,
+          flexShrink: 0,
+        },
+      },
+      // necessary for content to be below app bar
+      toolbar: {
+        fontSize: "1.2rem",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        ...theme.mixins.toolbar,
+      },
+      logo: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "0 0.5rem",
+        "& svg": {
+          height: "2rem",
+          width: "auto",
+          [theme.breakpoints.up("md")]: {
+            height: "2.5rem",
+          },
+        },
+      },
+      title: {
+        padding: "0 0.5rem",
+      },
+      footer: {
+        fontSize: "1rem",
+        padding: "0 0.5rem",
+      },
+      drawerPaper: {
+        width: sidebarWidth,
+      },
+      item: {
+        borderLeft: "3px solid",
+        borderColor: "transparent",
+      },
+      nested: {
+        paddingLeft: theme.spacing(4),
+      },
+      selected: {
+        borderLeft: "3px solid",
+        borderColor: theme.palette.secondary.main,
+      },
+      link: {
+        display: "flex",
+        width: "100%",
+        textDecoration: "none",
+        color: theme.palette.primary.contrastText,
+      },
+      dragger: {
+        width: theme.spacing(1),
+        cursor: "ew-resize",
+        padding: "4px 0 0",
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 100,
+        backgroundColor: theme.palette.divider,
+      },
+    })
+  );
+
   const { title, logo, footer } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -115,6 +128,27 @@ export const Sidebar = (props: IProps) => {
   const { auth } = useAuth();
 
   const { isLoggedIn } = auth;
+
+  const [drawerWidth, setDrawerWidth] = React.useState(sidebarWidth);
+
+  const handleMouseDown = (e: any) => {
+    document.addEventListener("mouseup", handleMouseUp, true);
+    document.addEventListener("mousemove", handleMouseMove, true);
+  };
+
+  const handleMouseUp = () => {
+    document.removeEventListener("mouseup", handleMouseUp, true);
+    document.removeEventListener("mousemove", handleMouseMove, true);
+  };
+
+  const handleMouseMove = useCallback((e: any) => {
+    const newWidth = e.clientX - document.body.offsetLeft;
+    if (newWidth > SIDEBAR_WIDTH_MIN && newWidth < SIDEBAR_WIDTH_MAX) {
+      setDrawerWidth(newWidth);
+      dispatch(resizeSidebar(newWidth));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleCloseDrawer = () => {
     dispatch(closeSidebar());
@@ -234,7 +268,13 @@ export const Sidebar = (props: IProps) => {
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
+          PaperProps={{ style: { width: drawerWidth } }}
         >
+          <div
+            onMouseDown={(e) => handleMouseDown(e)}
+            className={classes.dragger}
+          />
+
           {drawer}
         </Drawer>
       </Hidden>
@@ -246,7 +286,13 @@ export const Sidebar = (props: IProps) => {
           }}
           variant="permanent"
           open
+          PaperProps={{ style: { width: drawerWidth } }}
         >
+          <div
+            onMouseDown={(e) => handleMouseDown(e)}
+            className={classes.dragger}
+          />
+
           {drawer}
         </Drawer>
       </Hidden>

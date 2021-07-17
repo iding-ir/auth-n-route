@@ -1,6 +1,7 @@
 export const SIDEBAR_OPEN = "SIDEBAR_OPEN";
 export const SIDEBAR_CLOSE = "SIDEBAR_CLOSE";
 export const SIDEBAR_TOGGLE = "SIDEBAR_TOGGLE";
+export const SIDEBAR_RESIZE = "SIDEBAR_RESIZE";
 
 export const ITEM_TOGGLE = "ITEM_TOGGLE";
 export const ITEM_ON = "ITEM_ON";
