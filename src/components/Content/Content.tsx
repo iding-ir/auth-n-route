@@ -7,10 +7,14 @@ import { Breadcrumbs } from "../Breadcrumbs";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    toolbar: theme.mixins.toolbar,
-    content: {
+    wrapper: {
       flexGrow: 1,
       padding: theme.spacing(3),
+      paddingTop: 0,
+    },
+    toolbar: theme.mixins.toolbar,
+    content: {
+      marginTop: "1rem",
     },
   })
 );
@@ -23,12 +27,12 @@ export const Content = (props: IProps) => {
   const selectedPage = useSelector((state: IState) => state.page.selected);
 
   return (
-    <main className={classes.content}>
+    <main className={classes.wrapper}>
       <div className={classes.toolbar} />
 
       <Breadcrumbs />
 
-      {selectedPage.component}
+      <div className={classes.content}>{selectedPage.component}</div>
     </main>
   );
 };

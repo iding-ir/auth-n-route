@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
       ...theme.mixins.toolbar,
       display: "flex",
       alignItems: "center",
-      margin: "-1rem 0 1rem 0",
       borderBottom: `1px solid ${theme.palette.grey[800]}`,
 
       "& nav": {
