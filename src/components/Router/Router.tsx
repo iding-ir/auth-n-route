@@ -8,7 +8,7 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 
-import { routes, IRoute, flatRoutes } from "../../routes";
+import { routes, IRoute, flatRoutes, getRoute } from "../../routes";
 import { useAuth } from "../../hooks/useAuth";
 import { setPage } from "../../actions/page";
 import * as URLS from "../../constants/urls";
@@ -31,7 +31,8 @@ export const Router = (props: IProps) => {
     const { location } = props;
     const { pathname } = location;
 
-    const route = searchRoutes(routes, pathname);
+    const route =
+      searchRoutes(routes, pathname) || getRoute(URLS.URL_NOT_FOUND);
 
     const { showPrivate, showPublic } = route;
 
