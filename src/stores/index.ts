@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
+import { save, load } from "redux-localstorage-simple";
 
 import reducers from "../reducers";
 
@@ -11,9 +12,10 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(
-  reducers,
-  composeEnhancers(applyMiddleware(reduxThunk))
-);
+const createStoreWithMiddleware = composeEnhancers(
+  applyMiddleware(save(), reduxThunk)
+)(createStore);
+
+const store = createStoreWithMiddleware(reducers, load());
 
 export default store;
