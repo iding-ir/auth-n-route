@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import MUIBreadcrumbs from "@material-ui/core/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { useBreadcrumbs } from "./useBreadcrumbs";
 
@@ -43,12 +44,17 @@ export const Breadcrumbs = (props: IProps) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const { breadcrumbs } = useBreadcrumbs();
+  const minWidth = useMediaQuery("(min-width: 960px)");
 
   const renderBreadcrumbs = () => {
     return breadcrumbs.map((breadcrumb) => {
       if (breadcrumb.path) {
         return (
-          <Link to={breadcrumb.path} className={classes.breadcrumb}>
+          <Link
+            key={breadcrumb.key}
+            to={breadcrumb.path}
+            className={classes.breadcrumb}
+          >
             <span className={classes.icon}>{breadcrumb.icon}</span>
 
             <span className={classes.link}>{t(breadcrumb.label || "")}</span>
@@ -56,7 +62,11 @@ export const Breadcrumbs = (props: IProps) => {
         );
       } else {
         return (
-          <Typography color="textPrimary" className={classes.breadcrumb}>
+          <Typography
+            key={breadcrumb.key}
+            color="textPrimary"
+            className={classes.breadcrumb}
+          >
             <span className={classes.icon}>{breadcrumb.icon}</span>
 
             <span className={classes.label}>{t(breadcrumb.label || "")}</span>
@@ -68,7 +78,7 @@ export const Breadcrumbs = (props: IProps) => {
 
   return (
     <div className={classes.toolbar}>
-      <MUIBreadcrumbs aria-label="breadcrumb">
+      <MUIBreadcrumbs maxItems={minWidth ? 5 : 2} aria-label="breadcrumb">
         {renderBreadcrumbs()}
       </MUIBreadcrumbs>
     </div>
