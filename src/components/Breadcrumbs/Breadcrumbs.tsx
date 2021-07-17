@@ -5,6 +5,7 @@ import MUIBreadcrumbs from "@material-ui/core/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Divider from "@material-ui/core/Divider";
 
 import { useBreadcrumbs } from "./useBreadcrumbs";
 
@@ -14,7 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
       ...theme.mixins.toolbar,
       display: "flex",
       alignItems: "center",
-      borderBottom: `1px solid ${theme.palette.grey[800]}`,
 
       "& nav": {
         display: "flex",
@@ -24,13 +24,19 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(1),
       width: 20,
       height: 20,
-      color: theme.palette.grey[100],
+    },
+    iconActive: {
+      color: theme.palette.secondary.light,
+    },
+    iconInactive: {
+      color: theme.palette.grey[500],
     },
     breadcrumb: {
       display: "flex",
+      textDecoration: "none",
     },
     link: {
-      color: theme.palette.secondary.dark,
+      color: theme.palette.secondary.light,
     },
     label: {
       color: theme.palette.grey[500],
@@ -55,7 +61,9 @@ export const Breadcrumbs = (props: IProps) => {
             to={breadcrumb.path}
             className={classes.breadcrumb}
           >
-            <span className={classes.icon}>{breadcrumb.icon}</span>
+            <span className={`${classes.icon} ${classes.iconActive}`}>
+              {breadcrumb.icon}
+            </span>
 
             <span className={classes.link}>{t(breadcrumb.label || "")}</span>
           </Link>
@@ -67,7 +75,9 @@ export const Breadcrumbs = (props: IProps) => {
             color="textPrimary"
             className={classes.breadcrumb}
           >
-            <span className={classes.icon}>{breadcrumb.icon}</span>
+            <span className={`${classes.icon} ${classes.iconInactive}`}>
+              {breadcrumb.icon}
+            </span>
 
             <span className={classes.label}>{t(breadcrumb.label || "")}</span>
           </Typography>
@@ -77,10 +87,14 @@ export const Breadcrumbs = (props: IProps) => {
   };
 
   return (
-    <div className={classes.toolbar}>
-      <MUIBreadcrumbs maxItems={minWidth ? 5 : 2} aria-label="breadcrumb">
-        {renderBreadcrumbs()}
-      </MUIBreadcrumbs>
-    </div>
+    <>
+      <div className={classes.toolbar}>
+        <MUIBreadcrumbs maxItems={minWidth ? 5 : 2} aria-label="breadcrumb">
+          {renderBreadcrumbs()}
+        </MUIBreadcrumbs>
+      </div>
+
+      <Divider />
+    </>
   );
 };
