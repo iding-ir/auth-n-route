@@ -1,11 +1,11 @@
 import { ITEM_TOGGLE, ITEM_ON, ITEM_OFF } from "../constants/redux";
 import { IAction } from "../actions/items";
 
-export interface IStateItems {
+export interface IState {
   [key: string]: boolean;
 }
 
-const initialState: IStateItems = {};
+const initialState: IState = {};
 
 const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {

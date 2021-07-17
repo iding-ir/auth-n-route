@@ -5,11 +5,11 @@ import {
 } from "../constants/redux";
 import { IAction } from "../actions/sidebar";
 
-export interface IStateSidebar {
+export interface IState {
   open: boolean;
 }
 
-const initialState = {
+const initialState: IState = {
   open: false,
 };
 

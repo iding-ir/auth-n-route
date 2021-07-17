@@ -1,15 +1,18 @@
 import { THEME_CHANGE } from "../constants/redux";
-import { IActionTheme } from "../actions/theme";
-import { ITheme } from "../actions/theme";
+import { IAction, ITheme } from "../actions/theme";
 
-export type IStateTheme = ITheme;
+export interface IState {
+  current: ITheme;
+}
 
-const initialState: IStateTheme = "dark" as ITheme;
+const initialState: IState = {
+  current: "dark",
+};
 
-const reducer = (state = initialState, action: IActionTheme) => {
+const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case THEME_CHANGE:
-      return action.payload.theme;
+      return { ...state, current: action.payload.theme };
     default:
       return state;
   }

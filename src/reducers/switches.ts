@@ -1,15 +1,15 @@
 import { SWITCH_TOGGLE, SWITCH_ON, SWITCH_OFF } from "../constants/redux";
-import { IActionSwitches } from "../actions/switches";
+import { IAction } from "../actions/switches";
 
-export interface IStateSwitches {
+export interface IState {
   [key: string]: boolean;
 }
 
-const initialState: IStateSwitches = {
+const initialState: IState = {
   theme: true,
 };
 
-const reducer = (state = initialState, action: IActionSwitches) => {
+const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SWITCH_TOGGLE:
       return {

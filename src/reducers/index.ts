@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 
-import authReducer, { IStateAuth } from "./auth";
-import pageReducer, { IStatePage } from "./page";
-import sidebarReducer, { IStateSidebar } from "./sidebar";
-import SwitchesReducer, { IStateSwitches } from "./switches";
-import ThemeReducer, { IStateTheme } from "./theme";
-import ItemsReducer, { IStateItems } from "./items";
+import authReducer, { IState as IStateAuth } from "./auth";
+import pageReducer, { IState as IStatePage } from "./page";
+import sidebarReducer, { IState as IStateSidebar } from "./sidebar";
+import SwitchesReducer, { IState as IStateSwitches } from "./switches";
+import ThemeReducer, { IState as IStateTheme } from "./theme";
+import ItemsReducer, { IState as IStateItems } from "./items";
 
 export interface IState {
   auth: IStateAuth;

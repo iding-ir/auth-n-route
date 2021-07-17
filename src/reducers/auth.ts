@@ -1,15 +1,15 @@
 import { AUTH_LOGIN, AUTH_LOGOUT } from "../constants/redux";
 import { IAction } from "../actions/auth";
 
-export interface IStateAuth {
+export interface IState {
   username: string | null;
   email: string | null;
   name: string | null;
   token: string | null;
-  isLoggedIn: boolean;
+  isLoggedIn: boolean | null;
 }
 
-const initialState = {
+const initialState: IState = {
   username: null,
   email: null,
   name: null,

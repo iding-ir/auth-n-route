@@ -14,7 +14,7 @@ import { changeTheme } from "../actions/theme";
 export const useTheme = () => {
   const dispatch = useDispatch();
 
-  const stateTheme = useSelector((state: IState) => state.theme);
+  const stateTheme = useSelector((state: IState) => state.theme.current);
 
   const toggleTheme = () => {
     const newTheme = stateTheme === "light" ? "dark" : "light";

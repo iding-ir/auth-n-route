@@ -1,16 +1,16 @@
 import { PAGE_SET } from "../constants/redux";
 import { iRoute, IRoute, IRouteGroup } from "../routes";
-import { IActionPage } from "../actions/page";
+import { IAction } from "../actions/page";
 
-export interface IStatePage {
+export interface IState {
   selected: IRoute | IRouteGroup;
 }
 
-const initialState: IStatePage = {
+const initialState: IState = {
   selected: iRoute,
 };
 
-const reducer = (state = initialState, action: IActionPage) => {
+const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case PAGE_SET:
       return { ...state, selected: action.payload.route };
