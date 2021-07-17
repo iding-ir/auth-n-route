@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "flex",
       },
     },
-    text: {
-      marginRight: theme.spacing(1),
-    },
     icon: {
       marginRight: theme.spacing(1),
       width: 20,
@@ -71,8 +68,6 @@ export const Breadcrumbs = (props: IProps) => {
 
   return (
     <div className={classes.toolbar}>
-      <span className={classes.text}>{t("breadcrumbs.text")}</span>
-
       <MUIBreadcrumbs aria-label="breadcrumb">
         {renderBreadcrumbs()}
       </MUIBreadcrumbs>
