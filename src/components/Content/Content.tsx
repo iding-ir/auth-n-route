@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import { IState } from "../../reducers";
-import { Breadcrumb } from "../Breadcrumb";
+import { Breadcrumbs } from "../Breadcrumbs";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,7 +26,7 @@ export const Content = (props: IProps) => {
     <main className={classes.content}>
       <div className={classes.toolbar} />
 
-      <Breadcrumb />
+      <Breadcrumbs />
 
       {selectedPage.component}
     </main>

@@ -1,25 +1,27 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import MUIBreadcrumbs from "@material-ui/core/Breadcrumbs";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { IState } from "../../reducers";
-import { routes, IRoutes } from "../../routes";
+import { useBreadcrumbs } from "./useBreadcrumbs";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     toolbar: {
       ...theme.mixins.toolbar,
       display: "flex",
+      alignItems: "center",
       margin: "-1rem 0 1rem 0",
       borderBottom: `1px solid ${theme.palette.grey[800]}`,
 
       "& nav": {
         display: "flex",
       },
+    },
+    text: {
+      marginRight: theme.spacing(1),
     },
     icon: {
       marginRight: theme.spacing(1),
@@ -41,31 +43,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface IProps {}
 
-export const Breadcrumb = (props: IProps) => {
+export const Breadcrumbs = (props: IProps) => {
   const classes = useStyles();
   const { t } = useTranslation();
-
-  const selectedPage = useSelector((state: IState) => state.page.selected);
-
-  const lookInto = (routes: IRoutes, prev: IRoutes) => {
-    let result: IRoutes = [];
-
-    for (let index in routes) {
-      const route = routes[index];
-
-      if (route.key === selectedPage.key) {
-        result = [...result, ...prev, route];
-
-        break;
-      } else if ("items" in route) {
-        result = [...result, ...lookInto(route.items, [...prev, route])];
-      }
-    }
-
-    return result;
-  };
-
-  const breadcrumbs = lookInto(routes, []);
+  const { breadcrumbs } = useBreadcrumbs();
 
   const renderBreadcrumbs = () => {
     return breadcrumbs.map((breadcrumb) => {
@@ -91,7 +72,11 @@ export const Breadcrumb = (props: IProps) => {
 
   return (
     <div className={classes.toolbar}>
-      <Breadcrumbs aria-label="breadcrumb">{renderBreadcrumbs()}</Breadcrumbs>
+      <span className={classes.text}>{t("breadcrumbs.text")}</span>
+
+      <MUIBreadcrumbs aria-label="breadcrumb">
+        {renderBreadcrumbs()}
+      </MUIBreadcrumbs>
     </div>
   );
 };

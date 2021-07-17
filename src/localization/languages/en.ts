@@ -29,6 +29,9 @@ const localization = {
     content: "Content",
     close: "Close",
   },
+  breadcrumbs: {
+    text: "You are currently here: ",
+  },
 };
 
 export default localization;
