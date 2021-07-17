@@ -27,7 +27,7 @@ export const useBreadcrumbs = () => {
 
   let breadcrumbs = lookInto(routes, []);
 
-  const homeRoute = getRoute(URLS.URL_HOME);
+  const homeRoute = getRoute(URLS.HOME);
 
   if (selectedPage.key !== homeRoute.key) {
     breadcrumbs = [homeRoute, ...breadcrumbs];

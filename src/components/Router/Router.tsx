@@ -31,15 +31,14 @@ export const Router = (props: IProps) => {
     const { location } = props;
     const { pathname } = location;
 
-    const route =
-      searchRoutes(routes, pathname) || getRoute(URLS.URL_NOT_FOUND);
+    const route = searchRoutes(routes, pathname) || getRoute(URLS.NOT_FOUND);
 
     const { showPrivate, showPublic } = route;
 
     dispatch(setPage(route));
 
     return showPrivate && !isLoggedIn && !showPublic ? (
-      <Redirect to={{ pathname: URLS.URL_LOGIN }} />
+      <Redirect to={{ pathname: URLS.LOGIN }} />
     ) : null;
   };
 

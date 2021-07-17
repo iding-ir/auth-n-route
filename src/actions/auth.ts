@@ -1,7 +1,7 @@
 import { AUTH_LOGIN, AUTH_LOGOUT, PAGE_SET } from "../constants/redux";
-import { URL_HOME, URL_LOGIN } from "../constants/urls";
+import * as URLS from "../constants/urls";
 import auth from "../apis/auth";
-import { routes, IRoute, getRoute } from "../routes";
+import { getRoute } from "../routes";
 
 export interface IAction {
   type: string;
@@ -14,7 +14,7 @@ export interface IAction {
 }
 
 export const login = (username: string, password: string): any => {
-  const homeRoute = getRoute(URL_HOME);
+  const homeRoute = getRoute(URLS.HOME);
 
   return async (dispatch: any, getState: any) => {
     const response = await auth.get("/login.json");
@@ -27,7 +27,7 @@ export const login = (username: string, password: string): any => {
 };
 
 export const logout = (username: string | null): any => {
-  const loginRoute = getRoute(URL_LOGIN);
+  const loginRoute = getRoute(URLS.LOGIN);
 
   return async (dispatch: any, getState: any) => {
     const response = await auth.get("/logout.json");

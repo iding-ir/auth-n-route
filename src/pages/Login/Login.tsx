@@ -45,7 +45,7 @@ export const Login = (props: IProps) => {
   const { isLoggedIn } = auth;
 
   return isLoggedIn ? (
-    <Redirect to={{ pathname: URLS.URL_HOME }} />
+    <Redirect to={{ pathname: URLS.HOME }} />
   ) : (
     <div className={classes.Login}>
       <Paper className={classes.wrapper}>

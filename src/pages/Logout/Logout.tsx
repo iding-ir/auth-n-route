@@ -17,7 +17,7 @@ export const Logout = (props: IProps) => {
   dispatch(logout(username));
 
   return isLoggedIn ? (
-    <Redirect to={{ pathname: URLS.URL_LOGIN }} />
+    <Redirect to={{ pathname: URLS.LOGIN }} />
   ) : (
     <div>Logout</div>
   );
