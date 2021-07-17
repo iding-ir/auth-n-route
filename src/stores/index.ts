@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import reduxThunk from "redux-thunk";
-import { save, load } from "redux-localstorage-simple";
 
 import reducers from "../reducers";
 
@@ -12,10 +13,19 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const createStoreWithMiddleware = composeEnhancers(
-  applyMiddleware(save(), reduxThunk)
-)(createStore);
+const persistConfig = {
+  key: "root",
+  storage,
+  blacklist: ["page"],
+};
 
-const store = createStoreWithMiddleware(reducers, load());
+const persistedReducer = persistReducer(persistConfig, reducers);
 
-export default store;
+const store = createStore(
+  persistedReducer,
+  composeEnhancers(applyMiddleware(reduxThunk))
+);
+
+const persistor = persistStore(store);
+
+export { store, persistor };

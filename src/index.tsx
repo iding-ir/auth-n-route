@@ -2,19 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { PersistGate } from "redux-persist/integration/react";
 
 import "./index.css";
 import "./localization";
-import store from "./stores";
+import { store, persistor } from "./stores";
 import { App } from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <CssBaseline />
+      <PersistGate loading={null} persistor={persistor}>
+        <CssBaseline />
 
-      <App />
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
