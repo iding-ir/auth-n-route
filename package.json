@@ -1,6 +1,6 @@
 {
   "name": "auth-n-route",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Basic React, Redux and MUI authentication and routing",
   "keywords": [
     "react",
