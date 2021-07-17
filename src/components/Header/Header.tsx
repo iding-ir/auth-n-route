@@ -15,14 +15,14 @@ import { IState } from "../../reducers";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up("md")]: {
         width: `calc(100% - ${SIDEBAR_WIDTH}px)`,
         marginLeft: SIDEBAR_WIDTH,
       },
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up("md")]: {
         display: "none",
       },
     },

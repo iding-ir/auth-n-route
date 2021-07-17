@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     drawer: {
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up("md")]: {
         width: SIDEBAR_WIDTH,
         flexShrink: 0,
       },
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
       "& svg": {
         height: "2rem",
         width: "auto",
-        [theme.breakpoints.up("sm")]: {
+        [theme.breakpoints.up("md")]: {
           height: "2.5rem",
         },
       },
@@ -239,7 +239,7 @@ export const Sidebar = (props: IProps) => {
         </Drawer>
       </Hidden>
 
-      <Hidden xsDown implementation="css">
+      <Hidden smDown implementation="css">
         <Drawer
           classes={{
             paper: classes.drawerPaper,
