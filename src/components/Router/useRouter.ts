@@ -1,4 +1,4 @@
-import { IRoutes, IRoute, IRouteGroup, getRoute } from "../../routes";
+import { IRoutes, IRoute, IRouteGroup, flatRoutes } from "../../routes";
 import * as URLS from "../../constants/urls";
 
 export const useRouter = () => {
@@ -15,7 +15,9 @@ export const useRouter = () => {
       }
     });
 
-    const notFoundRoute = getRoute(URLS.URL_NOT_FOUND);
+    const notFoundRoute = flatRoutes(routes).find((route) => {
+      return route.path === URLS.URL_NOT_FOUND;
+    }) as IRoute | IRouteGroup;
 
     result = result || notFoundRoute;
 
