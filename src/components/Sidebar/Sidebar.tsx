@@ -25,6 +25,7 @@ import { closeSidebar } from "../../actions/sidebar";
 import { routes, IRoute, IRouteGroup, IRoutes } from "../../routes";
 import { IState } from "../../reducers";
 import { useAuth } from "../../hooks/useAuth";
+import { toggleItem } from "../../actions/items";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -107,12 +108,9 @@ export const Sidebar = (props: IProps) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const [collapseOpen, setCollapseOpen] = useState<{ [key: string]: boolean }>(
-    {}
-  );
-
   const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
   const selectedPage = useSelector((state: IState) => state.page.selected);
+  const sidebarItems = useSelector((state: IState) => state.items);
 
   const { auth } = useAuth();
 
@@ -134,7 +132,7 @@ export const Sidebar = (props: IProps) => {
           if ("items" in item) {
             return (
               <Collapse
-                in={collapseOpen[item.key]}
+                in={sidebarItems[item.key]}
                 timeout="auto"
                 unmountOnExit
               >
@@ -146,7 +144,7 @@ export const Sidebar = (props: IProps) => {
 
         const renderCollapseIcon = () => {
           if ("items" in item) {
-            return collapseOpen[item.key] ? <ExpandLess /> : <ExpandMore />;
+            return sidebarItems[item.key] ? <ExpandLess /> : <ExpandMore />;
           }
         };
 
@@ -155,10 +153,7 @@ export const Sidebar = (props: IProps) => {
             item.action();
           }
 
-          setCollapseOpen({
-            ...collapseOpen,
-            [item.key]: !collapseOpen[item.key],
-          });
+          dispatch(toggleItem(item.key));
         };
 
         const renderItem = () => {
