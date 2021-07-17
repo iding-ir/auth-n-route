@@ -228,5 +228,11 @@ export const flatRoutes = (routes: IRoutes) => {
         : [...result, route];
   });
 
-  return result;
+  return result as IRoutes;
+};
+
+export const getRoute = (path: string) => {
+  return flatRoutes(routes).find((route) => {
+    return route.path === path;
+  }) as IRoute | IRouteGroup;
 };

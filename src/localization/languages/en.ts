@@ -30,7 +30,7 @@ const localization = {
     close: "Close",
   },
   breadcrumbs: {
-    text: "You are currently here: ",
+    text: "Current location:",
   },
 };
 

@@ -8,7 +8,14 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 
-import { routes, IRoutes, IRoute, IRouteGroup, flatRoutes } from "../../routes";
+import {
+  routes,
+  IRoutes,
+  IRoute,
+  IRouteGroup,
+  flatRoutes,
+  getRoute,
+} from "../../routes";
 import { useAuth } from "../../hooks/useAuth";
 import { setPage } from "../../actions/page";
 import * as URLS from "../../constants/urls";
@@ -38,9 +45,7 @@ export const Router = (props: IProps) => {
       }
     });
 
-    const notFoundRoute = flatRoutes(routes).find(
-      (route: IRoute) => route.path === URLS.URL_NOT_FOUND
-    );
+    const notFoundRoute = getRoute(URLS.URL_NOT_FOUND);
 
     result = result || notFoundRoute;
 
