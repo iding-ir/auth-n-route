@@ -20,21 +20,13 @@ const initialState: IState = {
 const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
     case SIDEBAR_OPEN:
-      return {
-        open: true,
-      };
+      return { ...state, open: true };
     case SIDEBAR_CLOSE:
-      return {
-        open: false,
-      };
+      return { ...state, open: false };
     case SIDEBAR_TOGGLE:
-      return {
-        open: !state.open,
-      };
+      return { ...state, open: !state.open };
     case SIDEBAR_RESIZE:
-      return {
-        width: action.payload?.width,
-      };
+      return { ...state, width: action.payload?.width };
     default:
       return state;
   }
