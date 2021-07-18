@@ -11,12 +11,8 @@ import { useTranslation } from "react-i18next";
 import { openSidebar } from "../../actions/sidebar";
 import { IState } from "../../reducers";
 
-interface IProps {}
-
-export const Header = (props: IProps) => {
-  const sidebarWidth = useSelector((state: IState) => state.sidebar.width);
-
-  const useStyles = makeStyles((theme: Theme) =>
+const useStyles = (sidebarWidth: number) =>
+  makeStyles((theme: Theme) =>
     createStyles({
       appBar: {
         [theme.breakpoints.up("md")]: {
@@ -33,11 +29,15 @@ export const Header = (props: IProps) => {
     })
   );
 
-  const classes = useStyles();
+interface IProps {}
+
+export const Header = (props: IProps) => {
+  const sidebarWidth = useSelector((state: IState) => state.sidebar.width);
+  const selectedPage = useSelector((state: IState) => state.page.selected);
+
+  const classes = useStyles(sidebarWidth)();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-
-  const selectedPage = useSelector((state: IState) => state.page.selected);
 
   const handleDrawerOpen = () => {
     dispatch(openSidebar());

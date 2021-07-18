@@ -1,4 +1,4 @@
-import React, { useCallback, ReactNode } from "react";
+import React, { useState, useCallback, ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import {
@@ -20,12 +20,12 @@ import Collapse from "@material-ui/core/Collapse";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { closeSidebar, resizeSidebar } from "../../actions/sidebar";
+import { closeSidebar } from "../../actions/sidebar";
 import { routes, IRoute, IRouteGroup, IRoutes } from "../../routes";
 import { IState } from "../../reducers";
 import { useAuth } from "../../hooks/useAuth";
 import { toggleItem } from "../../actions/items";
-import { SIDEBAR_WIDTH_MIN, SIDEBAR_WIDTH_MAX } from "../../constants/config";
+import { useSidebar } from "./useSidebar";
 
 interface IProps {
   title?: ReactNode;
@@ -33,10 +33,8 @@ interface IProps {
   footer?: ReactNode;
 }
 
-export const Sidebar = (props: IProps) => {
-  const sidebarWidth = useSelector((state: IState) => state.sidebar.width);
-
-  const useStyles = makeStyles((theme: Theme) =>
+const useStyles = (sidebarWidth: number) =>
+  makeStyles((theme: Theme) =>
     createStyles({
       wrapper: {
         display: "flex",
@@ -115,40 +113,22 @@ export const Sidebar = (props: IProps) => {
     })
   );
 
+export const Sidebar = (props: IProps) => {
   const { title, logo, footer } = props;
-  const classes = useStyles();
-  const theme = useTheme();
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
 
   const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
   const selectedPage = useSelector((state: IState) => state.page.selected);
   const sidebarItems = useSelector((state: IState) => state.items);
+  const sidebarWidth = useSelector((state: IState) => state.sidebar.width);
 
+  const theme = useTheme();
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { auth } = useAuth();
+  const classes = useStyles(sidebarWidth)();
+  const { drawerWidth, handleMouseDown } = useSidebar();
 
   const { isLoggedIn } = auth;
-
-  const [drawerWidth, setDrawerWidth] = React.useState(sidebarWidth);
-
-  const handleMouseDown = (e: any) => {
-    document.addEventListener("mouseup", handleMouseUp, true);
-    document.addEventListener("mousemove", handleMouseMove, true);
-  };
-
-  const handleMouseUp = () => {
-    document.removeEventListener("mouseup", handleMouseUp, true);
-    document.removeEventListener("mousemove", handleMouseMove, true);
-  };
-
-  const handleMouseMove = useCallback((e: any) => {
-    const newWidth = e.clientX - document.body.offsetLeft;
-    if (newWidth > SIDEBAR_WIDTH_MIN && newWidth < SIDEBAR_WIDTH_MAX) {
-      setDrawerWidth(newWidth);
-      dispatch(resizeSidebar(newWidth));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleCloseDrawer = () => {
     dispatch(closeSidebar());
@@ -270,11 +250,6 @@ export const Sidebar = (props: IProps) => {
           }}
           PaperProps={{ style: { width: drawerWidth } }}
         >
-          <div
-            onMouseDown={(e) => handleMouseDown(e)}
-            className={classes.dragger}
-          />
-
           {drawer}
         </Drawer>
       </Hidden>
