@@ -1,4 +1,4 @@
-import React, { useState, useCallback, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import {
@@ -100,7 +100,7 @@ const useStyles = (sidebarWidth: number) =>
         color: theme.palette.primary.contrastText,
       },
       dragger: {
-        width: theme.spacing(1),
+        width: "1px",
         cursor: "ew-resize",
         padding: "4px 0 0",
         position: "absolute",
@@ -109,6 +109,9 @@ const useStyles = (sidebarWidth: number) =>
         bottom: 0,
         zIndex: 100,
         backgroundColor: theme.palette.divider,
+        "&:hover": {
+          width: theme.spacing(1),
+        },
       },
     })
   );
@@ -126,7 +129,7 @@ export const Sidebar = (props: IProps) => {
   const { t } = useTranslation();
   const { auth } = useAuth();
   const classes = useStyles(sidebarWidth)();
-  const { drawerWidth, handleMouseDown } = useSidebar();
+  const { handleMouseDown } = useSidebar();
 
   const { isLoggedIn } = auth;
 
@@ -248,7 +251,7 @@ export const Sidebar = (props: IProps) => {
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
-          PaperProps={{ style: { width: drawerWidth } }}
+          PaperProps={{ style: { width: sidebarWidth } }}
         >
           {drawer}
         </Drawer>
@@ -261,7 +264,7 @@ export const Sidebar = (props: IProps) => {
           }}
           variant="permanent"
           open
-          PaperProps={{ style: { width: drawerWidth } }}
+          PaperProps={{ style: { width: sidebarWidth } }}
         >
           <div
             onMouseDown={(e) => handleMouseDown(e)}
