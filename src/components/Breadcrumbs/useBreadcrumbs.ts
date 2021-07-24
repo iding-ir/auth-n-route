@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 
 import { IState } from "../../reducers";
-import { routes, IRoutes, getRoute } from "../../routes";
+import { routes } from "../../routes/routes";
+import { IRoutes, getRoute } from "../../routes";
 import * as URLS from "../../constants/urls";
 
 export const useBreadcrumbs = () => {

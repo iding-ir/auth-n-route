@@ -8,7 +8,8 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 
-import { routes, IRoute, flatRoutes, getRoute } from "../../routes";
+import { routes } from "../../routes/routes";
+import { IRoute, getRoute, flatRoutes } from "../../routes";
 import { useAuth } from "../../hooks/useAuth";
 import { setPage } from "../../actions/page";
 import * as URLS from "../../constants/urls";

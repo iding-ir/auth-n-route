@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import MultimediaIcon from "@material-ui/icons/PermMedia";
 import PhotosIcon from "@material-ui/icons/PhotoCamera";
@@ -15,14 +15,15 @@ import LogoutIcon from "@material-ui/icons/MeetingRoom";
 import NotFoundIcon from "@material-ui/icons/PanTool";
 
 import * as URLS from "../constants/urls";
+import { IRoutes } from ".";
 import { Home } from "../pages/Home";
-import { Multimedia } from "../pages/Multimedia";
+// import { Multimedia } from "../pages/Multimedia";
 import { Photos } from "../pages/Multimedia/Photos";
 import { PublicPhotos } from "../pages/Multimedia/Photos/Public";
 import { PrivatePhotos } from "../pages/Multimedia/Photos/Private";
 import { Video } from "../pages/Multimedia/Videos";
 import { Audio } from "../pages/Multimedia/Audios";
-import { Profile } from "../pages/Profile";
+// import { Profile } from "../pages/Profile";
 import { Inbox } from "../pages/Profile/Inbox";
 import { Services } from "../pages/Profile/Services";
 import { Login } from "../pages/Login";
@@ -30,26 +31,6 @@ import { Logout } from "../pages/Logout";
 import { NotFound } from "../pages/NotFound";
 import { ThemeSwitch } from "../components/ThemeSwitch";
 import { SettingsModal } from "../components/SettingsModal";
-
-export interface IRoute {
-  key: string;
-  showPrivate: boolean;
-  showPublic: boolean;
-  showInSidebar: boolean;
-  exact?: boolean;
-  path?: string;
-  label?: string;
-  icon?: JSX.Element;
-  component?: ReactNode;
-  action?: () => void;
-  custom?: JSX.Element;
-}
-
-export interface IRouteGroup extends IRoute {
-  items: IRoutes;
-}
-
-export type IRoutes = (IRoute | IRouteGroup)[];
 
 export const routes: IRoutes = [
   {
@@ -215,24 +196,3 @@ export const routes: IRoutes = [
     component: <NotFound />,
   },
 ];
-
-export const iRoute: IRoute | IRouteGroup = routes[0];
-
-export const flatRoutes = (routes: IRoutes) => {
-  let result: IRoute[] = [];
-
-  routes.forEach((route) => {
-    result =
-      "items" in route
-        ? [...result, ...flatRoutes(route.items)]
-        : [...result, route];
-  });
-
-  return result as IRoutes;
-};
-
-export const getRoute = (path: string) => {
-  return flatRoutes(routes).find((route) => {
-    return route.path === path;
-  }) as IRoute | IRouteGroup;
-};

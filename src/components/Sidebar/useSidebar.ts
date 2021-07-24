@@ -7,7 +7,7 @@ import { SIDEBAR_WIDTH_MIN, SIDEBAR_WIDTH_MAX } from "../../constants/config";
 export const useSidebar = () => {
   const dispatch = useDispatch();
 
-  const handleMouseDown = (e: any) => {
+  const handleMouseDown = (event: any) => {
     document.addEventListener("mouseup", handleMouseUp, true);
     document.addEventListener("mousemove", handleMouseMove, true);
 
@@ -21,8 +21,8 @@ export const useSidebar = () => {
     document.body.style.userSelect = "unset";
   };
 
-  const handleMouseMove = useCallback((e: any) => {
-    let newWidth = e.clientX - document.body.offsetLeft;
+  const handleMouseMove = useCallback((event: any) => {
+    let newWidth = event.clientX - document.body.offsetLeft;
 
     if (newWidth > SIDEBAR_WIDTH_MIN && newWidth < SIDEBAR_WIDTH_MAX) {
       dispatch(resizeSidebar(newWidth));

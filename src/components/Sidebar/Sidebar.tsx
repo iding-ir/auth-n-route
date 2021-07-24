@@ -21,7 +21,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { closeSidebar } from "../../actions/sidebar";
-import { routes, IRoute, IRouteGroup, IRoutes } from "../../routes";
+import { routes } from "../../routes/routes";
+import { IRoute, IRouteGroup, IRoutes } from "../../routes";
 import { IState } from "../../reducers";
 import { useAuth } from "../../hooks/useAuth";
 import { toggleItem } from "../../actions/items";
@@ -267,7 +268,7 @@ export const Sidebar = (props: IProps) => {
           PaperProps={{ style: { width: sidebarWidth } }}
         >
           <div
-            onMouseDown={(e) => handleMouseDown(e)}
+            onMouseDown={(event) => handleMouseDown(event)}
             className={classes.dragger}
           />
 
