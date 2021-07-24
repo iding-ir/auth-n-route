@@ -15,7 +15,7 @@ import LogoutIcon from "@material-ui/icons/MeetingRoom";
 import NotFoundIcon from "@material-ui/icons/PanTool";
 
 import * as URLS from "../constants/urls";
-import { IRoutes } from ".";
+import { IRoutes } from "./index";
 import { Home } from "../pages/Home";
 // import { Multimedia } from "../pages/Multimedia";
 import { Photos } from "../pages/Multimedia/Photos";
