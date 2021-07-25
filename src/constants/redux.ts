@@ -14,6 +14,4 @@ export const SWITCH_OFF = "SWITCH_OFF";
 export const AUTH_LOGIN = "AUTH_LOGIN";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-export const PAGE_SET = "PAGE_SET";
-
 export const THEME_CHANGE = "THEME_CHANGE";

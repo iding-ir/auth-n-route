@@ -177,8 +177,15 @@ export const routes: IRoutes = [
     icon: <TemplateIcon />,
     template: () => {
       return (
-        <Link to={URLS.HOME} style={{ padding: "1rem", color: "#ffffff" }}>
-          Home
+        <Link
+          to={URLS.HOME}
+          style={{
+            padding: "1rem",
+            color: "#ffffff",
+            textDecoration: "none",
+          }}
+        >
+          Go to Home
         </Link>
       );
     },

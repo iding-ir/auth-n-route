@@ -7,7 +7,9 @@ import { useTheme } from "../../themes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    App: {},
+    App: {
+      height: "100%",
+    },
   })
 );
 

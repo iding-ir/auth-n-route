@@ -21,20 +21,26 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "flex",
       },
     },
+    root: {},
+    item: {
+      display: "flex",
+      textDecoration: "none",
+    },
     icon: {
       marginRight: theme.spacing(1),
-      width: 20,
-      height: 20,
+      width: "24px",
+      height: "24px",
+
+      "& svg": {
+        width: "100%",
+        height: "100%",
+      },
     },
     iconActive: {
       color: theme.palette.secondary.light,
     },
     iconInactive: {
       color: theme.palette.grey[500],
-    },
-    breadcrumb: {
-      display: "flex",
-      textDecoration: "none",
     },
     link: {
       color: theme.palette.secondary.light,
@@ -64,7 +70,7 @@ export const Breadcrumbs = (props: IProps) => {
           <Link
             key={breadcrumb.key}
             to={breadcrumb.path}
-            className={classes.breadcrumb}
+            className={classes.item}
           >
             <span className={`${classes.icon} ${classes.iconActive}`}>
               {breadcrumb.icon}
@@ -78,7 +84,7 @@ export const Breadcrumbs = (props: IProps) => {
           <Typography
             key={breadcrumb.key}
             color="textPrimary"
-            className={classes.breadcrumb}
+            className={classes.item}
           >
             <span className={`${classes.icon} ${classes.iconInactive}`}>
               {breadcrumb.icon}
@@ -94,7 +100,11 @@ export const Breadcrumbs = (props: IProps) => {
   return (
     <>
       <div className={classes.toolbar}>
-        <MUIBreadcrumbs maxItems={minWidth ? 5 : 2} aria-label="breadcrumb">
+        <MUIBreadcrumbs
+          className={classes.root}
+          maxItems={minWidth ? 5 : 2}
+          aria-label="breadcrumb"
+        >
           {renderBreadcrumbs()}
         </MUIBreadcrumbs>
       </div>
