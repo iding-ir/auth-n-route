@@ -64,8 +64,8 @@ export const Breadcrumbs = (props: IProps) => {
   const minWidth = useMediaQuery("(min-width: 960px)");
 
   const renderBreadcrumbs = () => {
-    return breadcrumbs.map((breadcrumb) => {
-      if (breadcrumb.path) {
+    return breadcrumbs.map((breadcrumb, index: number) => {
+      if (breadcrumb.path && index !== breadcrumbs.length - 1) {
         return (
           <Link
             key={breadcrumb.key}
