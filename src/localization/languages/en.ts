@@ -20,6 +20,7 @@ const localization = {
     schedule: "Schedule",
     theme: "Theme",
     settings: "Settings",
+    template: "Template",
     login: "Login",
     logout: "Logout",
     notFound: "Not Found",

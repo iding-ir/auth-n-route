@@ -8,6 +8,7 @@ export const AUDIOS = "/multimedia/audios";
 export const PROFILE = "/profile";
 export const INBOX = "/profile/inbox";
 export const SERVICES = "/profile/services";
+export const TEMPLATE = "/template";
 export const LOGIN = "/login";
 export const LOGOUT = "/logout";
 export const NOT_FOUND = "/*";

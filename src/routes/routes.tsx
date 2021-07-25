@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import MultimediaIcon from "@material-ui/icons/PermMedia";
 import PhotosIcon from "@material-ui/icons/PhotoCamera";
@@ -10,6 +11,7 @@ import ProfileIcon from "@material-ui/icons/Person";
 import InboxIcon from "@material-ui/icons/Email";
 import ServicesIcon from "@material-ui/icons/Assessment";
 import ScheduleIcon from "@material-ui/icons/Alarm";
+import TemplateIcon from "@material-ui/icons/Pages";
 import LoginIcon from "@material-ui/icons/AccountBox";
 import LogoutIcon from "@material-ui/icons/MeetingRoom";
 import NotFoundIcon from "@material-ui/icons/PanTool";
@@ -164,6 +166,22 @@ export const routes: IRoutes = [
     showPublic: true,
     showInSidebar: true,
     custom: <SettingsModal />,
+  },
+  {
+    key: "template",
+    showPrivate: true,
+    showPublic: true,
+    showInSidebar: true,
+    path: URLS.TEMPLATE,
+    label: "sidebar.template",
+    icon: <TemplateIcon />,
+    template: () => {
+      return (
+        <Link to={URLS.HOME} style={{ padding: "1rem", color: "#ffffff" }}>
+          Home
+        </Link>
+      );
+    },
   },
   {
     key: "login",

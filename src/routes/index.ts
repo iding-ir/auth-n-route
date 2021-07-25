@@ -12,6 +12,7 @@ export interface IRoute {
   label?: string;
   icon?: JSX.Element;
   component?: ReactNode;
+  template?: () => JSX.Element;
   action?: () => void;
   custom?: JSX.Element;
 }

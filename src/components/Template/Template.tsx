@@ -18,7 +18,9 @@ export const Template = (props: IProps) => {
   const { t } = useTranslation();
   const { theme } = useTheme();
 
-  return (
+  return page.template ? (
+    page.template()
+  ) : (
     <>
       <Header page={page} />
 
