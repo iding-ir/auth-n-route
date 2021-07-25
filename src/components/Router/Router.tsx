@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import { useDispatch } from "react-redux";
 import {
   HashRouter,
   Switch,
@@ -8,12 +7,12 @@ import {
   RouteComponentProps,
 } from "react-router-dom";
 
+import { useRouter } from "./useRouter";
+import { Template } from "../Template";
 import { routes } from "../../routes/routes";
 import { IRoute, getRoute, flatRoutes } from "../../routes";
 import { useAuth } from "../../hooks/useAuth";
-import { setPage } from "../../actions/page";
 import * as URLS from "../../constants/urls";
-import { useRouter } from "./useRouter";
 
 interface IProps {
   children: ReactNode;
@@ -22,7 +21,6 @@ interface IProps {
 export const Router = (props: IProps) => {
   const { children } = props;
 
-  const dispatch = useDispatch();
   const { searchRoutes } = useRouter();
   const { auth } = useAuth();
 
@@ -36,11 +34,11 @@ export const Router = (props: IProps) => {
 
     const { showPrivate, showPublic } = route;
 
-    dispatch(setPage(route));
-
     return showPrivate && !isLoggedIn && !showPublic ? (
       <Redirect to={{ pathname: URLS.LOGIN }} />
-    ) : null;
+    ) : (
+      <Template page={route} />
+    );
   };
 
   const renderRoutes = () => {

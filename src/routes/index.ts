@@ -22,8 +22,6 @@ export interface IRouteGroup extends IRoute {
 
 export type IRoutes = (IRoute | IRouteGroup)[];
 
-export const iRoute: IRoute | IRouteGroup = routes[0];
-
 export const flatRoutes = (routes: IRoutes) => {
   let result: IRoute[] = [];
 

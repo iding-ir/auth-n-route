@@ -1,20 +1,15 @@
-import { useSelector } from "react-redux";
-
-import { IState } from "../../reducers";
+import { IRoute, IRouteGroup, IRoutes, getRoute } from "../../routes";
 import { routes } from "../../routes/routes";
-import { IRoutes, getRoute } from "../../routes";
 import * as URLS from "../../constants/urls";
 
-export const useBreadcrumbs = () => {
-  const selectedPage = useSelector((state: IState) => state.page.selected);
-
+export const useBreadcrumbs = (page: IRoute | IRouteGroup) => {
   const lookInto = (routes: IRoutes, prev: IRoutes) => {
     let result: IRoutes = [];
 
     for (let index in routes) {
       const route = routes[index];
 
-      if (route.key === selectedPage.key) {
+      if (route.key === page.key) {
         result = [...result, ...prev, route];
 
         break;
@@ -30,7 +25,7 @@ export const useBreadcrumbs = () => {
 
   const homeRoute = getRoute(URLS.HOME);
 
-  if (selectedPage.key !== homeRoute.key) {
+  if (page.key !== homeRoute.key) {
     breadcrumbs = [homeRoute, ...breadcrumbs];
   }
 

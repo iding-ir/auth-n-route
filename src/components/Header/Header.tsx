@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 
 import { openSidebar } from "../../actions/sidebar";
 import { IState } from "../../reducers";
+import { IRoute, IRouteGroup } from "../../routes";
 
 const useStyles = (sidebarWidth: number) =>
   makeStyles((theme: Theme) =>
@@ -29,11 +30,14 @@ const useStyles = (sidebarWidth: number) =>
     })
   );
 
-interface IProps {}
+interface IProps {
+  page: IRoute | IRouteGroup;
+}
 
 export const Header = (props: IProps) => {
+  const { page } = props;
+
   const sidebarWidth = useSelector((state: IState) => state.sidebar.width);
-  const selectedPage = useSelector((state: IState) => state.page.selected);
 
   const classes = useStyles(sidebarWidth)();
   const dispatch = useDispatch();
@@ -44,8 +48,8 @@ export const Header = (props: IProps) => {
   };
 
   const renderTitle = () => {
-    if (selectedPage.label) {
-      return t(selectedPage.label);
+    if (page.label) {
+      return t(page.label);
     }
   };
 

@@ -32,6 +32,7 @@ interface IProps {
   title?: ReactNode;
   logo?: ReactNode;
   footer?: ReactNode;
+  page: IRoute | IRouteGroup;
 }
 
 const useStyles = (sidebarWidth: number) =>
@@ -118,10 +119,9 @@ const useStyles = (sidebarWidth: number) =>
   );
 
 export const Sidebar = (props: IProps) => {
-  const { title, logo, footer } = props;
+  const { title, logo, footer, page } = props;
 
   const sidebarOpen = useSelector((state: IState) => state.sidebar.open);
-  const selectedPage = useSelector((state: IState) => state.page.selected);
   const sidebarItems = useSelector((state: IState) => state.items);
   const sidebarWidth = useSelector((state: IState) => state.sidebar.width);
 
@@ -143,7 +143,7 @@ export const Sidebar = (props: IProps) => {
       return list.map((item: IRoute | IRouteGroup) => {
         const className = clsx(classes.item, {
           [classes.nested]: nested,
-          [classes.selected]: selectedPage.key === item.key,
+          [classes.selected]: page.key === item.key,
         });
 
         const renderCollapse = () => {

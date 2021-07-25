@@ -8,6 +8,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Divider from "@material-ui/core/Divider";
 
 import { useBreadcrumbs } from "./useBreadcrumbs";
+import { IRoute, IRouteGroup } from "../../routes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,12 +45,16 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps {
+  page: IRoute | IRouteGroup;
+}
 
 export const Breadcrumbs = (props: IProps) => {
+  const { page } = props;
+
   const classes = useStyles();
   const { t } = useTranslation();
-  const { breadcrumbs } = useBreadcrumbs();
+  const { breadcrumbs } = useBreadcrumbs(page);
   const minWidth = useMediaQuery("(min-width: 960px)");
 
   const renderBreadcrumbs = () => {

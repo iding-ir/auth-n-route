@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface IProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Wrapper = (props: IProps) => {

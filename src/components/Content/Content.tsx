@@ -1,9 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import { IState } from "../../reducers";
 import { Breadcrumbs } from "../Breadcrumbs";
+import { IRoute, IRouteGroup } from "../../routes";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,20 +18,22 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface IProps {}
+interface IProps {
+  page: IRoute | IRouteGroup;
+}
 
 export const Content = (props: IProps) => {
-  const classes = useStyles();
+  const { page } = props;
 
-  const selectedPage = useSelector((state: IState) => state.page.selected);
+  const classes = useStyles();
 
   return (
     <main className={classes.wrapper}>
       <div className={classes.toolbar} />
 
-      <Breadcrumbs />
+      <Breadcrumbs page={page} />
 
-      <div className={classes.content}>{selectedPage.component}</div>
+      <div className={classes.content}>{page.component}</div>
     </main>
   );
 };
