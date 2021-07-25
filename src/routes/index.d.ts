@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, FunctionComponent } from "react";
 
 export interface IRoute {
   key: string;
@@ -9,8 +9,8 @@ export interface IRoute {
   path?: string;
   label?: string;
   icon?: JSX.Element;
-  component?: ReactNode;
-  template?: () => JSX.Element;
+  contents?: ReactNode;
+  template?: FunctionComponent;
   action?: () => void;
   custom?: JSX.Element;
 }

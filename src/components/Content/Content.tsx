@@ -33,7 +33,7 @@ export const Content = (props: IProps) => {
 
       <Breadcrumbs page={page} />
 
-      <div className={classes.content}>{page.component}</div>
+      <div className={classes.content}>{page.contents}</div>
     </main>
   );
 };

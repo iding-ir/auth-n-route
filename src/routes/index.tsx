@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import MultimediaIcon from "@material-ui/icons/PermMedia";
 import PhotosIcon from "@material-ui/icons/PhotoCamera";
@@ -28,6 +27,8 @@ import { Audio } from "../pages/Multimedia/Audios";
 // import { Profile } from "../pages/Profile";
 import { Inbox } from "../pages/Profile/Inbox";
 import { Services } from "../pages/Profile/Services";
+import { Template } from "../pages/Template";
+import { Custom } from "../templates/Custom";
 import { Login } from "../pages/Login";
 import { Logout } from "../pages/Logout";
 import { NotFound } from "../pages/NotFound";
@@ -44,7 +45,7 @@ export const routes: IRoutes = [
     path: URLS.HOME,
     label: "sidebar.home",
     icon: <HomeIcon />,
-    component: <Home />,
+    contents: <Home />,
   },
   {
     key: "multimedia",
@@ -54,7 +55,7 @@ export const routes: IRoutes = [
     // path: URLS.MULTIMEDIA,
     label: "sidebar.multimedia",
     icon: <MultimediaIcon />,
-    // component: <Multimedia />,
+    // contents: <Multimedia />,
     items: [
       {
         key: "photos",
@@ -64,7 +65,7 @@ export const routes: IRoutes = [
         path: URLS.PHOTOS,
         label: "sidebar.photos",
         icon: <PhotosIcon />,
-        component: <Photos />,
+        contents: <Photos />,
         items: [
           {
             key: "public-photos",
@@ -74,7 +75,7 @@ export const routes: IRoutes = [
             path: URLS.PHOTOS_PUBLIC,
             label: "sidebar.publicPhotos",
             icon: <PublicPhotosIcon />,
-            component: <PublicPhotos />,
+            contents: <PublicPhotos />,
           },
           {
             key: "private-photos",
@@ -84,7 +85,7 @@ export const routes: IRoutes = [
             path: URLS.PHOTOS_PRIVATE,
             label: "sidebar.privatePhotos",
             icon: <PrivatePhotosIcon />,
-            component: <PrivatePhotos />,
+            contents: <PrivatePhotos />,
           },
         ],
       },
@@ -96,7 +97,7 @@ export const routes: IRoutes = [
         path: URLS.VIDEOS,
         label: "sidebar.videos",
         icon: <VideoIcon />,
-        component: <Video />,
+        contents: <Video />,
       },
       {
         key: "audios",
@@ -106,7 +107,7 @@ export const routes: IRoutes = [
         path: URLS.AUDIOS,
         label: "sidebar.audios",
         icon: <AudioIcon />,
-        component: <Audio />,
+        contents: <Audio />,
       },
     ],
   },
@@ -118,7 +119,7 @@ export const routes: IRoutes = [
     // path: URLS.PROFILE,
     label: "sidebar.profile",
     icon: <ProfileIcon />,
-    // component: <Profile />,
+    // contents: <Profile />,
     items: [
       {
         key: "inbox",
@@ -128,7 +129,7 @@ export const routes: IRoutes = [
         path: URLS.INBOX,
         label: "sidebar.inbox",
         icon: <InboxIcon />,
-        component: <Inbox />,
+        contents: <Inbox />,
       },
       {
         key: "services",
@@ -138,7 +139,7 @@ export const routes: IRoutes = [
         path: URLS.SERVICES,
         label: "sidebar.services",
         icon: <ServicesIcon />,
-        component: <Services />,
+        contents: <Services />,
       },
     ],
   },
@@ -175,20 +176,8 @@ export const routes: IRoutes = [
     path: URLS.TEMPLATE,
     label: "sidebar.template",
     icon: <TemplateIcon />,
-    template: () => {
-      return (
-        <Link
-          to={URLS.HOME}
-          style={{
-            padding: "1rem",
-            color: "#ffffff",
-            textDecoration: "none",
-          }}
-        >
-          Go to Home
-        </Link>
-      );
-    },
+    contents: <Template />,
+    template: Custom,
   },
   {
     key: "login",
@@ -198,7 +187,7 @@ export const routes: IRoutes = [
     path: URLS.LOGIN,
     label: "sidebar.login",
     icon: <LoginIcon />,
-    component: <Login />,
+    contents: <Login />,
   },
   {
     key: "logout",
@@ -208,7 +197,7 @@ export const routes: IRoutes = [
     path: URLS.LOGOUT,
     label: "sidebar.logout",
     icon: <LogoutIcon />,
-    component: <Logout />,
+    contents: <Logout />,
   },
   {
     key: "not-found",
@@ -218,6 +207,6 @@ export const routes: IRoutes = [
     path: URLS.NOT_FOUND,
     label: "sidebar.notFound",
     icon: <NotFoundIcon />,
-    component: <NotFound />,
+    contents: <NotFound />,
   },
 ];
