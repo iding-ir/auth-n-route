@@ -2,7 +2,7 @@ import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import { Breadcrumbs } from "../Breadcrumbs";
-import { IRoute, IRouteGroup } from "../../routes";
+import { IRoute, IRouteGroup } from "../../routes/index.d";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

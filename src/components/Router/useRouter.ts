@@ -1,4 +1,4 @@
-import { IRoutes, IRoute, IRouteGroup } from "../../routes";
+import { IRoutes, IRoute, IRouteGroup } from "../../routes/index.d";
 
 export const useRouter = () => {
   const searchRoutes = (routes: IRoutes, pathname: string) => {

@@ -1,8 +1,10 @@
-import { IRoute, IRouteGroup, IRoutes, getRoute } from "../../routes";
-import { routes } from "../../routes/routes";
+import { useRoutes } from "../../routes/useRoutes";
+import { IRoute, IRouteGroup, IRoutes } from "../../routes/index.d";
 import * as URLS from "../../constants/urls";
 
 export const useBreadcrumbs = (page: IRoute | IRouteGroup) => {
+  const { routes, getRoute } = useRoutes();
+
   const lookInto = (routes: IRoutes, prev: IRoutes) => {
     let result: IRoutes = [];
 

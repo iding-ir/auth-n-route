@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Header } from "../Header";
 import { Sidebar } from "../Sidebar";
 import { Content } from "../Content";
-import { IRoute, IRouteGroup } from "../../routes";
+import { IRoute, IRouteGroup } from "../../routes/index.d";
 import { useTheme } from "../../themes";
 import { ReactComponent as Logo } from "../../assets/images/logo.svg";
 

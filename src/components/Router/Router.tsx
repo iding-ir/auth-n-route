@@ -9,8 +9,8 @@ import {
 
 import { useRouter } from "./useRouter";
 import { Template } from "../Template";
-import { routes } from "../../routes/routes";
-import { IRoute, getRoute, flatRoutes } from "../../routes";
+import { useRoutes } from "../../routes/useRoutes";
+import { IRoute } from "../../routes/index.d";
 import { useAuth } from "../../hooks/useAuth";
 import * as URLS from "../../constants/urls";
 
@@ -22,6 +22,7 @@ export const Router = (props: IProps) => {
   const { children } = props;
 
   const { searchRoutes } = useRouter();
+  const { routes, getRoute, flatRoutes } = useRoutes();
   const { auth } = useAuth();
 
   const { isLoggedIn } = auth;

@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 import { openSidebar } from "../../actions/sidebar";
 import { IState } from "../../reducers";
-import { IRoute, IRouteGroup } from "../../routes";
+import { IRoute, IRouteGroup } from "../../routes/index.d";
 
 const useStyles = (sidebarWidth: number) =>
   makeStyles((theme: Theme) =>

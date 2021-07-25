@@ -21,8 +21,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { closeSidebar } from "../../actions/sidebar";
-import { routes } from "../../routes/routes";
-import { IRoute, IRouteGroup, IRoutes } from "../../routes";
+import { useRoutes } from "../../routes/useRoutes";
+import { IRoute, IRouteGroup, IRoutes } from "../../routes/index.d";
 import { IState } from "../../reducers";
 import { useAuth } from "../../hooks/useAuth";
 import { toggleItem } from "../../actions/items";
@@ -131,6 +131,7 @@ export const Sidebar = (props: IProps) => {
   const { auth } = useAuth();
   const classes = useStyles(sidebarWidth)();
   const { handleMouseDown } = useSidebar();
+  const { routes } = useRoutes();
 
   const { isLoggedIn } = auth;
 

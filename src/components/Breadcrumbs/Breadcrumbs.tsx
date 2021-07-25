@@ -8,7 +8,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Divider from "@material-ui/core/Divider";
 
 import { useBreadcrumbs } from "./useBreadcrumbs";
-import { IRoute, IRouteGroup } from "../../routes";
+import { IRoute, IRouteGroup } from "../../routes/index.d";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
