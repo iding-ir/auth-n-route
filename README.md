@@ -155,6 +155,29 @@ const routes: IRoutes = [
     custom: <SettingsModal />,
   },
   {
+    key: "template",
+    showPrivate: true,
+    showPublic: true,
+    showInSidebar: true,
+    path: URLS.TEMPLATE,
+    label: "sidebar.template",
+    icon: <TemplateIcon />,
+    template: () => {
+      return (
+        <Link
+          to={URLS.HOME}
+          style={{
+            padding: "1rem",
+            color: "#ffffff",
+            textDecoration: "none",
+          }}
+        >
+          Go to Home
+        </Link>
+      );
+    },
+  },
+  {
     key: "login",
     showPrivate: false,
     showPublic: true,
