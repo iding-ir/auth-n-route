@@ -31,7 +31,7 @@ const routes: IRoutes = [
     path: URLS.HOME,
     label: "sidebar.home",
     icon: <HomeIcon />,
-    component: <Home />,
+    contents: <Home />,
   },
   {
     key: "multimedia",
@@ -41,7 +41,7 @@ const routes: IRoutes = [
     // path: URLS.MULTIMEDIA,
     label: "sidebar.multimedia",
     icon: <MultimediaIcon />,
-    // component: <Multimedia />,
+    // contents: <Multimedia />,
     items: [
       {
         key: "photos",
@@ -51,7 +51,7 @@ const routes: IRoutes = [
         path: URLS.PHOTOS,
         label: "sidebar.photos",
         icon: <PhotosIcon />,
-        component: <Photos />,
+        contents: <Photos />,
         items: [
           {
             key: "public-photos",
@@ -61,7 +61,7 @@ const routes: IRoutes = [
             path: URLS.PHOTOS_PUBLIC,
             label: "sidebar.publicPhotos",
             icon: <PublicPhotosIcon />,
-            component: <PublicPhotos />,
+            contents: <PublicPhotos />,
           },
           {
             key: "private-photos",
@@ -71,7 +71,7 @@ const routes: IRoutes = [
             path: URLS.PHOTOS_PRIVATE,
             label: "sidebar.privatePhotos",
             icon: <PrivatePhotosIcon />,
-            component: <PrivatePhotos />,
+            contents: <PrivatePhotos />,
           },
         ],
       },
@@ -83,7 +83,7 @@ const routes: IRoutes = [
         path: URLS.VIDEOS,
         label: "sidebar.videos",
         icon: <VideoIcon />,
-        component: <Video />,
+        contents: <Video />,
       },
       {
         key: "audios",
@@ -93,7 +93,7 @@ const routes: IRoutes = [
         path: URLS.AUDIOS,
         label: "sidebar.audios",
         icon: <AudioIcon />,
-        component: <Audio />,
+        contents: <Audio />,
       },
     ],
   },
@@ -105,7 +105,7 @@ const routes: IRoutes = [
     // path: URLS.PROFILE,
     label: "sidebar.profile",
     icon: <ProfileIcon />,
-    // component: <Profile />,
+    // contents: <Profile />,
     items: [
       {
         key: "inbox",
@@ -115,7 +115,7 @@ const routes: IRoutes = [
         path: URLS.INBOX,
         label: "sidebar.inbox",
         icon: <InboxIcon />,
-        component: <Inbox />,
+        contents: <Inbox />,
       },
       {
         key: "services",
@@ -125,7 +125,7 @@ const routes: IRoutes = [
         path: URLS.SERVICES,
         label: "sidebar.services",
         icon: <ServicesIcon />,
-        component: <Services />,
+        contents: <Services />,
       },
     ],
   },
@@ -162,20 +162,8 @@ const routes: IRoutes = [
     path: URLS.TEMPLATE,
     label: "sidebar.template",
     icon: <TemplateIcon />,
-    template: () => {
-      return (
-        <Link
-          to={URLS.HOME}
-          style={{
-            padding: "1rem",
-            color: "#ffffff",
-            textDecoration: "none",
-          }}
-        >
-          Go to Home
-        </Link>
-      );
-    },
+    contents: <Template />,
+    template: Custom,
   },
   {
     key: "login",
@@ -185,7 +173,7 @@ const routes: IRoutes = [
     path: URLS.LOGIN,
     label: "sidebar.login",
     icon: <LoginIcon />,
-    component: <Login />,
+    contents: <Login />,
   },
   {
     key: "logout",
@@ -195,7 +183,7 @@ const routes: IRoutes = [
     path: URLS.LOGOUT,
     label: "sidebar.logout",
     icon: <LogoutIcon />,
-    component: <Logout />,
+    contents: <Logout />,
   },
   {
     key: "not-found",
@@ -205,7 +193,7 @@ const routes: IRoutes = [
     path: URLS.NOT_FOUND,
     label: "sidebar.notFound",
     icon: <NotFoundIcon />,
-    component: <NotFound />,
+    contents: <NotFound />,
   },
 ];
 ```
