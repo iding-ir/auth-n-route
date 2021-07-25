@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import { routes } from "./routes";
+import * as URLS from "../constants/urls";
 
 export interface IRoute {
   key: string;
@@ -23,8 +24,8 @@ export interface IRouteGroup extends IRoute {
 
 export type IRoutes = (IRoute | IRouteGroup)[];
 
-export const flatRoutes = (routes: IRoutes) => {
-  let result: IRoute[] = [];
+export const flatRoutes = (routes: IRoutes): IRoutes => {
+  let result: IRoutes = [];
 
   routes.forEach((route) => {
     result =
@@ -33,11 +34,18 @@ export const flatRoutes = (routes: IRoutes) => {
         : [...result, route];
   });
 
-  return result as IRoutes;
+  return result;
 };
 
-export const getRoute = (path: string) => {
-  return flatRoutes(routes).find((route) => {
-    return route.path === path;
-  }) as IRoute | IRouteGroup;
+export const getRoute = (path: string): IRoute | IRouteGroup => {
+  const notFound = flatRoutes(routes).find((route) => {
+    return route.path === URLS.NOT_FOUND;
+  }) as IRoute;
+
+  const result =
+    flatRoutes(routes).find((route) => {
+      return route.path === path;
+    }) || notFound;
+
+  return result;
 };
