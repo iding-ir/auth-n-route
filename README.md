@@ -20,8 +20,8 @@ It supports:
 - Nested sidebar items
 - Authenticated routes
 - Custom sidebar actions
-- Custom Sidebar components
-- Custom Page templates
+- Custom sidebar components
+- Custom page templates
 - URL params
 
 ## Usage
@@ -29,7 +29,7 @@ It supports:
 It converts the object below to an MUI dashboard.
 
 ```
-src\routes\routes.tsx
+src\routes\index.tsx
 ```
 
 ```
