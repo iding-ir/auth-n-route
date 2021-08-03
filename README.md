@@ -2,6 +2,7 @@
 
 - [Intro](#intro)
 - [Demo](#demo)
+- [Features](#features)
 - [Usage](#usage)
 
 ## Intro
@@ -11,6 +12,17 @@ Basic React, Redux and MUI authentication and routing.
 ## Demo
 
 [Live demo](http://auth-n-route.iding.ir)
+
+## Features
+
+It supports:
+
+- Nested sidebar items
+- Authenticated routes
+- Custom sidebar actions
+- Custom Sidebar components
+- Custom Page templates
+- URL params
 
 ## Usage
 
@@ -134,6 +146,7 @@ const routes: IRoutes = [
     showPrivate: true,
     showPublic: true,
     showInSidebar: true,
+    path: URLS.SCHEDULE,
     label: "sidebar.schedule",
     icon: <ScheduleIcon />,
     action: () => {
@@ -145,6 +158,7 @@ const routes: IRoutes = [
     showPrivate: true,
     showPublic: true,
     showInSidebar: true,
+    path: URLS.THEME,
     custom: <ThemeSwitch />,
   },
   {
@@ -152,6 +166,7 @@ const routes: IRoutes = [
     showPrivate: true,
     showPublic: true,
     showInSidebar: true,
+    path: URLS.SETTINGS,
     custom: <SettingsModal />,
   },
   {
@@ -164,6 +179,28 @@ const routes: IRoutes = [
     icon: <TemplateIcon />,
     contents: <Template />,
     template: Custom,
+  },
+  {
+    key: "blog-home",
+    showPrivate: true,
+    showPublic: true,
+    showInSidebar: true,
+    exact: true,
+    path: URLS.BLOG_HOME,
+    label: "sidebar.blog",
+    icon: <BlogIcon />,
+    contents: <BlogHome />,
+  },
+  {
+    key: "blog-page",
+    showPrivate: true,
+    showPublic: true,
+    showInSidebar: false,
+    exact: true,
+    path: URLS.BLOG_PAGE,
+    label: "sidebar.blog",
+    icon: <BlogIcon />,
+    contents: <BlogPage />,
   },
   {
     key: "login",
