@@ -4,7 +4,8 @@ import {
   Switch,
   Route,
   Redirect,
-  RouteComponentProps,
+  useLocation,
+  useRouteMatch,
 } from "react-router-dom";
 
 import { useRouter } from "./useRouter";
@@ -21,36 +22,14 @@ interface IProps {
 export const Router = (props: IProps) => {
   const { children } = props;
 
-  const { searchRoutes } = useRouter();
-  const { routes, getRoute, flatRoutes } = useRoutes();
-  const { auth } = useAuth();
-
-  const { isLoggedIn } = auth;
-
-  const pageRouteRenderer = (props: RouteComponentProps) => {
-    const { location } = props;
-    const { pathname } = location;
-
-    const route = searchRoutes(routes, pathname) || getRoute(URLS.NOT_FOUND);
-
-    const { showPrivate, showPublic } = route;
-
-    return showPrivate && !isLoggedIn && !showPublic ? (
-      <Redirect to={{ pathname: URLS.LOGIN }} />
-    ) : (
-      <Template page={route} />
-    );
-  };
+  const { routes, flatRoutes } = useRoutes();
 
   const renderRoutes = () => {
     return flatRoutes(routes).map((route: IRoute) => {
       return (
-        <Route
-          key={route.key}
-          exact={route.exact}
-          path={route.path}
-          render={(props) => pageRouteRenderer(props)}
-        />
+        <Route key={route.key} exact={route.exact} path={route.path}>
+          <Child />
+        </Route>
       );
     });
   };
@@ -61,5 +40,26 @@ export const Router = (props: IProps) => {
 
       {children}
     </HashRouter>
+  );
+};
+
+const Child = () => {
+  const { params } = useRouteMatch();
+  const { pathname } = useLocation();
+  const { searchRoutes } = useRouter();
+  const { routes, getRoute } = useRoutes();
+  const { auth } = useAuth();
+
+  const { isLoggedIn } = auth;
+
+  const route =
+    searchRoutes(routes, pathname, params) || getRoute(URLS.NOT_FOUND);
+
+  const { showPrivate, showPublic } = route;
+
+  return showPrivate && !isLoggedIn && !showPublic ? (
+    <Redirect to={{ pathname: URLS.LOGIN }} />
+  ) : (
+    <Template page={route} />
   );
 };

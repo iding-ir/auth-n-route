@@ -11,6 +11,7 @@ import InboxIcon from "@material-ui/icons/Email";
 import ServicesIcon from "@material-ui/icons/Assessment";
 import ScheduleIcon from "@material-ui/icons/Alarm";
 import TemplateIcon from "@material-ui/icons/Pages";
+import BlogIcon from "@material-ui/icons/LibraryBooks";
 import LoginIcon from "@material-ui/icons/AccountBox";
 import LogoutIcon from "@material-ui/icons/MeetingRoom";
 import NotFoundIcon from "@material-ui/icons/PanTool";
@@ -29,6 +30,7 @@ import { Inbox } from "../pages/Profile/Inbox";
 import { Services } from "../pages/Profile/Services";
 import { Template } from "../pages/Template";
 import { Custom } from "../templates/Custom";
+import { BlogHome, BlogPage } from "../pages/Blog";
 import { Login } from "../pages/Login";
 import { Logout } from "../pages/Logout";
 import { NotFound } from "../pages/NotFound";
@@ -148,6 +150,7 @@ export const routes: IRoutes = [
     showPrivate: true,
     showPublic: true,
     showInSidebar: true,
+    path: URLS.SCHEDULE,
     label: "sidebar.schedule",
     icon: <ScheduleIcon />,
     action: () => {
@@ -159,6 +162,7 @@ export const routes: IRoutes = [
     showPrivate: true,
     showPublic: true,
     showInSidebar: true,
+    path: URLS.THEME,
     custom: <ThemeSwitch />,
   },
   {
@@ -166,6 +170,7 @@ export const routes: IRoutes = [
     showPrivate: true,
     showPublic: true,
     showInSidebar: true,
+    path: URLS.SETTINGS,
     custom: <SettingsModal />,
   },
   {
@@ -178,6 +183,28 @@ export const routes: IRoutes = [
     icon: <TemplateIcon />,
     contents: <Template />,
     template: Custom,
+  },
+  {
+    key: "blog-home",
+    showPrivate: true,
+    showPublic: true,
+    showInSidebar: true,
+    exact: true,
+    path: URLS.BLOG_HOME,
+    label: "sidebar.blog",
+    icon: <BlogIcon />,
+    contents: <BlogHome />,
+  },
+  {
+    key: "blog-page",
+    showPrivate: true,
+    showPublic: true,
+    showInSidebar: false,
+    exact: true,
+    path: URLS.BLOG_PAGE,
+    label: "sidebar.blog",
+    icon: <BlogIcon />,
+    contents: <BlogPage />,
   },
   {
     key: "login",

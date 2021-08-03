@@ -21,6 +21,7 @@ const localization = {
     theme: "Theme",
     settings: "Settings",
     template: "Template",
+    blog: "Blog",
     login: "Login",
     logout: "Logout",
     notFound: "Not Found",
@@ -30,6 +31,11 @@ const localization = {
     content: "Content",
     close: "Close",
   },
+  blog: {
+    page: "Page {{page}}",
+    title: "Page ID is: {{page}}",
+    back: "Go back",
+  }
 };
 
 export default localization;
